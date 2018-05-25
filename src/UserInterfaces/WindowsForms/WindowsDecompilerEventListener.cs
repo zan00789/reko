@@ -26,6 +26,7 @@ using System;
 using System.ComponentModel;
 using System.ComponentModel.Design;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Reko.UserInterfaces.WindowsForms
@@ -80,7 +81,7 @@ namespace Reko.UserInterfaces.WindowsForms
         /// <param name="caption"></param>
         /// <param name="backgroundTask"></param>
         /// <returns></returns>
-        public bool StartBackgroundWork(string caption, Action backgroundTask)
+        public Task<bool> RunBackgroundWorkAsync(string caption, Action backgroundTask)
         {
             lastException = null;
             try
@@ -89,10 +90,10 @@ namespace Reko.UserInterfaces.WindowsForms
                 using (dlg = CreateDialog(caption))
                 {
                     if (uiSvc.ShowModalDialog(dlg) == Gui.DialogResult.OK)
-                        return true;
+                        return Task.FromResult(true);
                     if (lastException != null)
                         uiSvc.ShowError(lastException, "{0}", caption);
-                    return false;
+                    return Task.FromResult(false);
                 }
             }
             finally

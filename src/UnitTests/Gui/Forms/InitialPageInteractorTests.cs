@@ -106,7 +106,7 @@ namespace Reko.UnitTests.Gui.Forms
             memSvc.Stub(m => m.ViewImage(program));
             mr.ReplayAll();
 
-            i.OpenBinary("floxe.exe");
+            i.OpenBinaryAsync("floxe.exe").Wait();
             Assert.IsTrue(i.CanAdvance, "Page should be ready to advance");
             mr.VerifyAll();
         }
@@ -125,7 +125,7 @@ namespace Reko.UnitTests.Gui.Forms
             memSvc.Stub(m => m.ViewImage(program));
             mr.ReplayAll();
 
-            i.OpenBinary("floxe.exe");
+            i.OpenBinaryAsync("floxe.exe").Wait();
 
             Assert.IsTrue(i.CanAdvance, "Page should be ready to advance");
             mr.VerifyAll();
@@ -140,7 +140,7 @@ namespace Reko.UnitTests.Gui.Forms
             memSvc.Expect(s => s.ViewImage(program));
             mr.ReplayAll();
 
-            i.OpenBinary("floxe.exe");
+            i.OpenBinaryAsync("floxe.exe").Wait();
 
             mr.VerifyAll();
         }
@@ -154,7 +154,7 @@ namespace Reko.UnitTests.Gui.Forms
             memSvc.Stub(m => m.ViewImage(program));
             mr.ReplayAll();
 
-            i.OpenBinary("foo.exe");
+            i.OpenBinaryAsync("foo.exe").Wait();
 
             mr.VerifyAll();
         }
@@ -168,7 +168,7 @@ namespace Reko.UnitTests.Gui.Forms
             memSvc.Stub(m => m.ViewImage(program));
             mr.ReplayAll();
 
-            i.OpenBinary("foo.exe");
+            i.OpenBinaryAsync("foo.exe").Wait();
             Assert.IsTrue(i.LeavePage());
 
             mr.VerifyAll();
@@ -183,7 +183,7 @@ namespace Reko.UnitTests.Gui.Forms
             browserSvc.Stub(b => b.Load(project));
             mr.ReplayAll();
 
-            i.OpenBinary("foo.exe");
+            i.OpenBinaryAsync("foo.exe").Wait();
 
             var status = new CommandStatus();
             var text = new CommandText();
@@ -207,7 +207,7 @@ namespace Reko.UnitTests.Gui.Forms
             Assert.IsTrue(i.QueryStatus(cmd, status, null));
             Assert.AreEqual(MenuStatus.Visible, status.Status);
 
-            i.OpenBinary("foo.exe");
+            i.OpenBinaryAsync("foo.exe").Wait();
 
             Assert.IsTrue(i.QueryStatus(cmd, status, null));
             Assert.AreEqual(MenuStatus.Visible | MenuStatus.Enabled, status.Status);

@@ -24,15 +24,16 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace Reko.UnitTests.Mocks
 {
     public class FakeWorkerDialogService : IWorkerDialogService
     {
-        public bool StartBackgroundWork(string caption, Action backgroundWork)
+        public Task<bool> RunBackgroundWorkAsync(string caption, Action backgroundWork)
         {
             backgroundWork();
-            return true;
+            return Task.FromResult(true);
         }
 
         public void FinishBackgroundWork()

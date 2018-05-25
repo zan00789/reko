@@ -27,6 +27,7 @@ using System.Diagnostics;
 using System.Text;
 using Form = System.Windows.Forms.Form;
 using ContextMenu = System.Windows.Forms.ContextMenu;
+using System.Threading.Tasks;
 
 namespace Reko.UnitTests.Mocks
 {
@@ -145,9 +146,10 @@ namespace Reko.UnitTests.Mocks
             throw new NotImplementedException();
         }
 
-        public void WithWaitCursor(Action action)
+        public Task WithWaitCursorAsync(Action action)
         {
             action();
+            return Task.CompletedTask;
         }
 
         #region ICommandTarget Members

@@ -34,9 +34,9 @@ namespace Reko.Gui.Forms
 {
     public interface InitialPageInteractor : IPhasePageInteractor
     {
-        bool OpenBinary(string file);
-        bool OpenBinaryAs(string file, LoadDetails details);
-        bool Assemble(string file, Assembler asm);
+        Task<bool> OpenBinaryAsync(string file);
+        Task<bool> OpenBinaryAsAsync(string file, LoadDetails details);
+        Task<bool> AssembleAsync(string file, Assembler asm);
     }
 
     /// <summary>
@@ -106,13 +106,13 @@ namespace Reko.Gui.Forms
         /// </summary>
         /// <param name="file"></param>
         /// <returns>True if the opened file was a Reko project.</returns>
-        public bool OpenBinary(string file)
+        public async Task<bool> OpenBinaryAsync(string file)
         {
             var ldr = Services.RequireService<ILoader>();
             this.Decompiler = CreateDecompiler(ldr);
             var svc = Services.RequireService<IWorkerDialogService>();
             bool isOldProject = false;
-            svc.StartBackgroundWork("Loading program", delegate ()
+            await svc.RunBackgroundWorkAsync("Loading program", delegate ()
             {
                 isOldProject = Decompiler.Load(file);
             });
@@ -125,14 +125,14 @@ namespace Reko.Gui.Forms
         }
 
         //$TODO: change signature to OpenAs(raw)
-        public bool OpenBinaryAs(
+        public async Task<bool> OpenBinaryAsAsync(
             string file, 
             LoadDetails details)
         {
             var ldr = Services.RequireService<ILoader>();
             this.Decompiler = CreateDecompiler(ldr);
             IWorkerDialogService svc = Services.RequireService<IWorkerDialogService>();
-            svc.StartBackgroundWork("Loading program", delegate()
+            await svc.RunBackgroundWorkAsync("Loading program", delegate()
             {
                 Program program = Decompiler.LoadRawImage(file, details);
             });
@@ -158,12 +158,12 @@ namespace Reko.Gui.Forms
             }
         }
 
-        public bool Assemble(string file, Assembler asm)
+        public async Task<bool> AssembleAsync(string file, Assembler asm)
         {
             var ldr = Services.RequireService<ILoader>();
             this.Decompiler = CreateDecompiler(ldr);
             var svc = Services.RequireService<IWorkerDialogService>();
-            svc.StartBackgroundWork("Loading program", delegate()
+            await svc.RunBackgroundWorkAsync("Loading program", delegate()
             {
                 Decompiler.Assemble(file, asm);
             });

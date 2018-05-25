@@ -28,6 +28,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.Design;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Reko.UnitTests.Gui.Forms
 {
@@ -110,19 +111,19 @@ namespace Reko.UnitTests.Gui.Forms
         {
         }
 
-        public bool OpenBinary(string file)
+        public Task<bool> OpenBinaryAsync(string file)
         {
             OpenBinaryCalled = true;
-            return false;
+            return Task.FromResult(false);
         }
 
-        public bool OpenBinaryAs(string file, LoadDetails details)
+        public Task<bool> OpenBinaryAsAsync(string file, LoadDetails details)
         {
             throw new NotImplementedException();
         }
 
 
-        public bool Assemble(string file, Assembler asm)
+        public Task<bool> AssembleAsync(string file, Assembler asm)
         {
             throw new NotImplementedException();
         }

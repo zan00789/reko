@@ -107,7 +107,7 @@ namespace Reko.UnitTests.Gui.Windows.Forms
             mr.ReplayAll();
 
             When_CreateMainFormInteractor();
-            interactor.OpenBinary("floxie.exe");
+            interactor.OpenBinaryAsync("floxie.exe").Wait();
 
             mr.VerifyAll();
             Assert.AreSame(interactor.CurrentPhase, interactor.InitialPageInteractor);
@@ -137,7 +137,7 @@ namespace Reko.UnitTests.Gui.Windows.Forms
 
             When_CreateMainFormInteractor();
             diagnosticSvc.Error(new NullCodeLocation(""), "test");
-            interactor.OpenBinary(null);
+            interactor.OpenBinaryAsync(null).Wait();
 
             mr.VerifyAll();
         }
@@ -161,7 +161,7 @@ namespace Reko.UnitTests.Gui.Windows.Forms
             mr.ReplayAll();
 
             When_CreateMainFormInteractor();
-            interactor.OpenBinary("");
+            interactor.OpenBinaryAsync("").Wait();
 
             mr.VerifyAll();
         }
@@ -198,9 +198,9 @@ namespace Reko.UnitTests.Gui.Windows.Forms
             mr.ReplayAll();
 
             When_CreateMainFormInteractor();
-            interactor.OpenBinary(null);
+            interactor.OpenBinaryAsync(null).Wait();
             Assert.AreSame(interactor.InitialPageInteractor, interactor.CurrentPhase);
-            interactor.NextPhase();
+            interactor.NextPhaseAsync().Wait();
             Assert.AreSame(interactor.ScannedPageInteractor, interactor.CurrentPhase);
 
             mr.VerifyAll();
@@ -221,9 +221,9 @@ namespace Reko.UnitTests.Gui.Windows.Forms
             mr.ReplayAll();
 
             When_CreateMainFormInteractor();
-            interactor.OpenBinary(null);
+            interactor.OpenBinaryAsync(null).Wait();
             Assert.AreSame(interactor.InitialPageInteractor, interactor.CurrentPhase);
-            interactor.FinishDecompilation();
+            interactor.FinishDecompilationAsync().Wait();
             Assert.AreSame(interactor.FinalPageInteractor, interactor.CurrentPhase);
 
             mr.VerifyAll();
@@ -335,7 +335,7 @@ namespace Reko.UnitTests.Gui.Windows.Forms
 
             When_MainFormInteractorWithLoader();
             var page = new FakePhasePageInteractor();
-            interactor.SwitchInteractor(page);
+            interactor.SwitchInteractorAsync(page).Wait();
             CommandStatus status;
             page.CanAdvance = false;
             status = QueryStatus(CmdIds.ActionNextPhase);

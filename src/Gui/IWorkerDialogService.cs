@@ -23,12 +23,13 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace Reko.Gui
 {
     public interface IWorkerDialogService
     {
-        bool StartBackgroundWork(string caption, Action backgroundWork);
+        Task<bool> RunBackgroundWorkAsync(string caption, Action backgroundWork);
 
         /// <summary>
         /// Allows the background thread to update the caption.

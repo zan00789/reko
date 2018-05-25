@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
+using System.Threading.Tasks;
 using Reko.Gui;
 using ContextMenu = System.Windows.Forms.ContextMenu;
 using Form = System.Windows.Forms.Form;
@@ -117,9 +118,10 @@ namespace Reko.WindowsItp
             throw new NotImplementedException();
         }
 
-        public void WithWaitCursor(Action action)
+        public Task WithWaitCursorAsync(Action action)
         {
             action();
+            return Task.CompletedTask;
         }
     }
 }

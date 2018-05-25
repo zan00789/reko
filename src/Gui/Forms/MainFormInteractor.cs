@@ -33,6 +33,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Xml;
 
 namespace Reko.Gui.Forms
@@ -82,7 +83,7 @@ namespace Reko.Gui.Forms
 
         public IServiceProvider Services { get { return sc; } }
 
-        public void Attach(IMainForm mainForm)
+        public async void Attach(IMainForm mainForm)
         {
             this.form = mainForm;
 
@@ -104,7 +105,7 @@ namespace Reko.Gui.Forms
                 form.WindowState = uiPrefsSvc.WindowState;
             }
             catch { };
-            SwitchInteractor(pageInitial);
+            await SwitchInteractorAsync(pageInitial);
             form.UpdateToolbarState();
 
             form.Closed += this.MainForm_Closed;
@@ -222,9 +223,9 @@ namespace Reko.Gui.Forms
             get { return form; }
         }
 
-        public void OpenBinary(string file)
+        public Task OpenBinaryAsync(string file)
         {
-            OpenBinary(file, (f) => pageInitial.OpenBinary(f));
+            return OpenBinaryAsync(file, (f) => pageInitial.OpenBinaryAsync(f));
         }
 
         /// <summary>
@@ -232,13 +233,13 @@ namespace Reko.Gui.Forms
         /// </summary>
         /// <param name="file"></param>
         /// <param name="openAction"></param>
-        public void OpenBinary(string file, Func<string,bool> openAction)
+        public async Task OpenBinaryAsync(string file, Func<string,Task<bool>> openAction)
         {
             try
             {
                 CloseProject();
-                SwitchInteractor(InitialPageInteractor);
-                if (openAction(file))
+                await SwitchInteractorAsync(InitialPageInteractor);
+                if (await openAction(file))
                 {
                     ProjectFileName = file;
                 }
@@ -254,16 +255,20 @@ namespace Reko.Gui.Forms
         }
         }
 
-        public void OpenBinaryWithPrompt()
+        public Task OpenBinaryWithPrompt()
         {
             var uiSvc = Services.RequireService<IDecompilerShellUiService>();
             var fileName = uiSvc.ShowOpenFileDialog(null);
             if (fileName != null)
             {
                 mru.Use(fileName);
-                uiSvc.WithWaitCursor(() => OpenBinary(fileName, (f) => pageInitial.OpenBinary(f)));
-                }
+                return OpenBinaryAsync(fileName, (f) => pageInitial.OpenBinaryAsync(f));
             }
+            else
+            {
+                return Task.CompletedTask;
+            }
+        }
 
         /// <summary>
         /// Prompts the user for a metadata file and adds to the project.
@@ -291,7 +296,7 @@ namespace Reko.Gui.Forms
             }
         }
 
-        public bool AssembleFile()
+        public async Task<bool> AssembleFileAsync()
         {
             IAssembleFileDialog dlg = null;
             try
@@ -305,7 +310,7 @@ namespace Reko.Gui.Forms
                 var typeName = dlg.SelectedArchitectureTypeName;
                 var t = Type.GetType(typeName, true);
                 var asm = (Assembler) t.GetConstructor(Type.EmptyTypes).Invoke(null);
-                OpenBinary(dlg.FileName.Text, (f) => pageInitial.Assemble(f, asm));
+                await OpenBinaryAsync(dlg.FileName.Text, (f) => pageInitial.AssembleAsync(f, asm));
             }
             catch (Exception e)
             {
@@ -314,7 +319,7 @@ namespace Reko.Gui.Forms
             return true;
         }
 
-        public bool OpenBinaryAs()
+        public async Task OpenBinaryAs()
         {
             IOpenAsDialog dlg = null;
             IProcessorArchitecture arch = null;
@@ -324,7 +329,7 @@ namespace Reko.Gui.Forms
                 dlg.Services = sc;
                 dlg.ArchitectureOptions = new Dictionary<string, object>();
                 if (uiSvc.ShowModalDialog(dlg) != DialogResult.OK)
-                    return true;
+                    return;
 
                 var rawFileOption = (ListOption)dlg.RawFileTypes.SelectedValue;
                 string archName = null;
@@ -363,8 +368,8 @@ namespace Reko.Gui.Forms
                     EntryPoint = entry,
                 };
 
-                OpenBinary(dlg.FileName.Text, (f) =>
-                    pageInitial.OpenBinaryAs(
+                await OpenBinaryAsync(dlg.FileName.Text, (f) =>
+                    pageInitial.OpenBinaryAsAsync(
                         f,
                         details));
             }
@@ -374,7 +379,6 @@ namespace Reko.Gui.Forms
                     ex,
                     string.Format("An error occurred when opening the binary file {0}.", dlg.FileName.Text));
             }
-            return true;
         }
 
         public void CloseProject()
@@ -427,7 +431,7 @@ namespace Reko.Gui.Forms
             get { return Path.Combine(SettingsDirectory, "mru.txt"); }
         }
 
-        public void RestartRecompilation()
+        public async Task RestartRecompilationAsync()
         {
             if (decompilerSvc.Decompiler == null ||
                 decompilerSvc.Decompiler.Project == null)
@@ -437,14 +441,14 @@ namespace Reko.Gui.Forms
             {
                 program.Reset();
             }
-            SwitchInteractor(this.InitialPageInteractor);
+            await SwitchInteractorAsync(this.InitialPageInteractor);
             
             CloseAllDocumentWindows();
             diagnosticsSvc.ClearDiagnostics();
             projectBrowserSvc.Reload();
         }
 
-        public void NextPhase()
+        public async Task NextPhaseAsync()
         {
             try
             {
@@ -452,7 +456,7 @@ namespace Reko.Gui.Forms
 
                 if (next != null)
                 {
-                    SwitchInteractor(next);
+                    await SwitchInteractorAsync(next);
                 }
             }
             catch (Exception ex)
@@ -480,12 +484,12 @@ namespace Reko.Gui.Forms
             return next;
         }
 
-        public void FinishDecompilation()
+        public async Task FinishDecompilationAsync()
         {
             try
             {
                 IPhasePageInteractor prev = CurrentPhase;
-                workerDlgSvc.StartBackgroundWork("Finishing decompilation.", delegate()
+                await workerDlgSvc.RunBackgroundWorkAsync("Finishing decompilation.", delegate()
                 {
                     for (;;)
                     {
@@ -715,7 +719,7 @@ namespace Reko.Gui.Forms
             }
         }
 
-        public void SwitchInteractor(IPhasePageInteractor interactor)
+        public async Task SwitchInteractorAsync(IPhasePageInteractor interactor)
         {
             if (interactor == CurrentPhase)
                 return;
@@ -726,7 +730,7 @@ namespace Reko.Gui.Forms
                     return;
             }
             CurrentPhase = interactor;
-            workerDlgSvc.StartBackgroundWork("Entering next phase...", delegate()
+            await workerDlgSvc.RunBackgroundWorkAsync("Entering next phase...", delegate()
             {
                 interactor.PerformWork(workerDlgSvc);
             });
@@ -859,62 +863,65 @@ namespace Reko.Gui.Forms
             }
             if (cmdId.Guid == CmdSets.GuidReko)
             {
-                if (ExecuteMruFile(cmdId.ID))
+                var mruTask = ExecuteMruFile(cmdId.ID);
+                if (mruTask != null)
                 {
-                    form.UpdateToolbarState();
-                    return false;
+                    mruTask.ContinueWith(t => form.UpdateToolbarState(), TaskScheduler.FromCurrentSynchronizationContext());
+                    return true;
                 }
 
-                bool retval = false;
+                Task retval = Task.CompletedTask;
                 switch (cmdId.ID)
                 {
-                case CmdIds.FileOpen: OpenBinaryWithPrompt(); retval = true; break;
+                case CmdIds.FileOpen: retval = OpenBinaryWithPrompt(); break;
                 case CmdIds.FileOpenAs: retval = OpenBinaryAs(); break;
-                case CmdIds.FileAssemble: retval = AssembleFile(); break;
-                case CmdIds.FileSave: Save(); retval = true; break;
-                case CmdIds.FileAddMetadata: AddMetadataFile(); retval = true; break;
-                case CmdIds.FileCloseProject: CloseProject(); retval = true; break;
-                case CmdIds.FileExit: form.Close(); retval = true; break;
+                case CmdIds.FileAssemble: retval = AssembleFileAsync(); break;
+                case CmdIds.FileSave: Save(); break;
+                case CmdIds.FileAddMetadata: AddMetadataFile(); break;
+                case CmdIds.FileCloseProject: CloseProject();  break;
+                case CmdIds.FileExit: form.Close(); break;
 
-                case CmdIds.ActionRestartDecompilation: RestartRecompilation(); retval = true; break;
-                case CmdIds.ActionNextPhase: NextPhase(); retval = true; break;
-                case CmdIds.ActionFinishDecompilation: FinishDecompilation(); retval = true; break;
+                case CmdIds.ActionRestartDecompilation: retval = RestartRecompilationAsync(); break;
+                case CmdIds.ActionNextPhase: retval = NextPhaseAsync(); break;
+                case CmdIds.ActionFinishDecompilation: retval = FinishDecompilationAsync(); break;
 
-                case CmdIds.EditFind: EditFind(); retval = true; break;
+                case CmdIds.EditFind: EditFind(); break;
 
-                case CmdIds.ViewDisassembly: ViewDisassemblyWindow(); retval = true; break;
-                case CmdIds.ViewMemory: ViewMemoryWindow(); retval = true; break;
-                case CmdIds.ViewCallGraph: ViewCallGraph(); retval = true; break;
-                case CmdIds.ViewFindAllProcedures: FindProcedures(srSvc); retval = true; break;
-                case CmdIds.ViewFindStrings: FindStrings(srSvc); retval = true; break;
+                case CmdIds.ViewDisassembly: ViewDisassemblyWindow(); break;
+                case CmdIds.ViewMemory: ViewMemoryWindow(); break;
+                case CmdIds.ViewCallGraph: ViewCallGraph(); break;
+                case CmdIds.ViewFindAllProcedures: FindProcedures(srSvc); break;
+                case CmdIds.ViewFindStrings: FindStrings(srSvc); break;
 
-                case CmdIds.ToolsOptions: ToolsOptions(); retval = true; break;
-                case CmdIds.ToolsKeyBindings: ToolsKeyBindings(); retval = true; break;
+                case CmdIds.ToolsOptions: ToolsOptions(); break;
+                case CmdIds.ToolsKeyBindings: ToolsKeyBindings(); break;
 
-                case CmdIds.WindowsCascade: LayoutMdi(DocumentWindowLayout.None); retval = true; break;
-                case CmdIds.WindowsTileVertical: LayoutMdi(DocumentWindowLayout.TiledVertical); retval = true; break;
-                case CmdIds.WindowsTileHorizontal: LayoutMdi(DocumentWindowLayout.TiledHorizontal); retval = true; break;
-                case CmdIds.WindowsCloseAll: CloseAllDocumentWindows(); retval = true; break;
+                case CmdIds.WindowsCascade: LayoutMdi(DocumentWindowLayout.None); break;
+                case CmdIds.WindowsTileVertical: LayoutMdi(DocumentWindowLayout.TiledVertical); break;
+                case CmdIds.WindowsTileHorizontal: LayoutMdi(DocumentWindowLayout.TiledHorizontal); break;
+                case CmdIds.WindowsCloseAll: CloseAllDocumentWindows(); break;
 
-                case CmdIds.HelpAbout: ShowAboutBox(); retval = true; break;
+                case CmdIds.HelpAbout: ShowAboutBox(); break;
+                default: return false;
                 }
                 form.UpdateToolbarState();
-                return retval;
+
+                retval.ContinueWith(t => form.UpdateToolbarState(), TaskScheduler.FromCurrentSynchronizationContext());
+                return true;
             }
             return false;
         }
 
-        private bool ExecuteMruFile(int cmdId)
+        private Task ExecuteMruFile(int cmdId)
         {
             int iMru = cmdId - CmdIds.FileMru;
             if (0 <= iMru && iMru < mru.Items.Count)
             {
                 string file = mru.Items[iMru];
-                OpenBinary(file, (f) => pageInitial.OpenBinary(file));
                 mru.Use(file);
-                return true;
+                return OpenBinaryAsync (file, (f) => pageInitial.OpenBinaryAsync(file));
             }
-            return false;
+            return null;
         }
 
         private bool IsDecompilerLoaded

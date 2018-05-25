@@ -30,6 +30,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Reko.UserInterfaces.WindowsForms
@@ -204,7 +205,7 @@ namespace Reko.UserInterfaces.WindowsForms
             ctxMenuProp.SetValue(control, ctxMenu);
         }
 
-        public void WithWaitCursor(Action action)
+        public Task WithWaitCursorAsync(Action action)
         {
             var cursor = Cursor.Current;
             try
@@ -216,6 +217,7 @@ namespace Reko.UserInterfaces.WindowsForms
             {
                 Cursor.Current = Cursors.Arrow;
             }
+            return Task.CompletedTask;
         }
 
         /// <summary>
