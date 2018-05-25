@@ -27,8 +27,23 @@ namespace Reko.UnitTests.Mocks
 {
     public class FakeStatusBarService : IStatusBarService
     {
+        public void HideProgress()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SetSubtext(string subtext)
+        {
+            throw new NotImplementedException();
+        }
+
         public void SetText(string text)
         {
+        }
+
+        public void ShowProgress(int percentage)
+        {
+            throw new NotImplementedException();
         }
     }
 }
