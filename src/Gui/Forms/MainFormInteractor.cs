@@ -157,7 +157,7 @@ namespace Reko.Gui.Forms
             sc.AddService(typeof(ImageSegmentService), segmentViewSvc);
 
             var del = svcFactory.CreateDecompilerEventListener();
-            bgworkSvc = (IBackgroundWorkService)del;
+            this.bgworkSvc = (IBackgroundWorkService)del;
             sc.AddService(typeof(IBackgroundWorkService), bgworkSvc);
             sc.AddService(typeof(DecompilerEventListener), del);
 

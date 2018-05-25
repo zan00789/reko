@@ -55,6 +55,7 @@ namespace Reko.Gui.Forms
                 Decompiler.ReconstructTypes();
                 bgworkSvc.SetCaption("Structuring program.");
                 Decompiler.StructureProgram();
+                bgworkSvc.SetCaption("Finished decompilation.");
             }
             catch (Exception ex)
             {

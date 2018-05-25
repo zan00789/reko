@@ -52,6 +52,7 @@ namespace Reko.Gui.Forms
         {
             bgworkSvc.SetCaption("Generating intermediate code");
             Decompiler.AnalyzeDataFlow();
+            bgworkSvc.SetCaption("Generated intermediate code");
         }
 
         public override bool CanAdvance

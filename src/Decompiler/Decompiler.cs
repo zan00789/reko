@@ -425,6 +425,7 @@ namespace Reko
                 eventListener.ShowStatus("Writing .asm and .dis files.");
                 host.WriteDisassembly(program, w => DumpAssembler(program, w));
                 host.WriteIntermediateCode(program, w => EmitProgram(program, null, w));
+                eventListener.ShowStatus("");
             }
         }
 

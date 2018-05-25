@@ -41,6 +41,7 @@ namespace Reko.UserInterfaces.WindowsForms
         private IServiceProvider sp;
         private IDecompilerShellUiService uiSvc;
         private IDiagnosticsService diagnosticSvc;
+        private IStatusBarService sbSvc;
         private Exception lastException;
 
         private string status;
@@ -84,6 +85,7 @@ namespace Reko.UserInterfaces.WindowsForms
         /// <returns></returns>
         public Task<bool> RunBackgroundWorkAsync(string caption, Action backgroundTask)
         {
+            this.sbSvc = sp.RequireService<IStatusBarService>();
             lastException = null;
             try
             {
@@ -99,6 +101,8 @@ namespace Reko.UserInterfaces.WindowsForms
             }
             finally
             {
+                sbSvc.HideProgress();
+                sbSvc.SetSubtext("");
                 dlg = null;
             }
         }
@@ -110,11 +114,16 @@ namespace Reko.UserInterfaces.WindowsForms
         /// <param name="newCaption"></param>
         public void SetCaption(string newCaption)
         {
-            dlg.Invoke(() => { dlg.Caption.Text = newCaption; });
+            dlg.Invoke(() => {
+                dlg.Caption.Text = newCaption;
+                sbSvc.SetText(newCaption);
+                sbSvc.HideProgress();
+            });
         }
 
         public void ShowError(string failedOperation, Exception ex)
         {
+            //$TODO: should log this in DecompilerEventListener.
             dlg.Invoke(() => { uiSvc.ShowError(ex, failedOperation); });
         }
 
@@ -165,8 +174,10 @@ namespace Reko.UserInterfaces.WindowsForms
             if (e.ProgressPercentage != STATUS_UPDATE_ONLY)
             {
                 dlg.ProgressBar.Value = e.ProgressPercentage;
+                sbSvc.ShowProgress(e.ProgressPercentage);
             }
             dlg.Detail.Text = status;
+            sbSvc.SetSubtext(status);
         }
 
         void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)

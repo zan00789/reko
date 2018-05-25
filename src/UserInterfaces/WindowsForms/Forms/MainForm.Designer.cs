@@ -31,7 +31,6 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.statusStrip = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.treeBrowser = new System.Windows.Forms.TreeView();
             this.imlBrowser = new System.Windows.Forms.ImageList(this.components);
             this.tabControl1 = new System.Windows.Forms.TabControl();
@@ -48,6 +47,9 @@
             this.splitContainerMain = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.tabDocuments = new System.Windows.Forms.TabControl();
+            this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.statusSublabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.statusProgressBar = new System.Windows.Forms.ToolStripProgressBar();
             this.statusStrip.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabDiagnostics.SuspendLayout();
@@ -65,16 +67,13 @@
             // statusStrip
             // 
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel});
+            this.statusLabel,
+            this.statusSublabel,
+            this.statusProgressBar});
             this.statusStrip.Location = new System.Drawing.Point(0, 511);
             this.statusStrip.Name = "statusStrip";
             this.statusStrip.Size = new System.Drawing.Size(784, 22);
             this.statusStrip.TabIndex = 2;
-            // 
-            // toolStripStatusLabel
-            // 
-            this.toolStripStatusLabel.Name = "toolStripStatusLabel";
-            this.toolStripStatusLabel.Size = new System.Drawing.Size(0, 17);
             // 
             // treeBrowser
             // 
@@ -245,6 +244,21 @@
             this.tabDocuments.Size = new System.Drawing.Size(601, 339);
             this.tabDocuments.TabIndex = 0;
             // 
+            // statusLabel
+            // 
+            this.statusLabel.Name = "statusLabel";
+            this.statusLabel.Size = new System.Drawing.Size(0, 17);
+            // 
+            // statusSublabel
+            // 
+            this.statusSublabel.Name = "statusSublabel";
+            this.statusSublabel.Size = new System.Drawing.Size(0, 17);
+            // 
+            // statusProgressBar
+            // 
+            this.statusProgressBar.Name = "statusProgressBar";
+            this.statusProgressBar.Size = new System.Drawing.Size(100, 16);
+            // 
             // MainForm
             // 
             this.AllowDrop = true;
@@ -277,7 +291,6 @@
         #endregion
 
         private System.Windows.Forms.StatusStrip statusStrip;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel;
         private System.Windows.Forms.TreeView treeBrowser;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabFindResults;
@@ -294,6 +307,9 @@
         private System.Windows.Forms.SplitContainer splitContainerMain;
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.TabControl tabDocuments;
+        private System.Windows.Forms.ToolStripStatusLabel statusLabel;
+        private System.Windows.Forms.ToolStripStatusLabel statusSublabel;
+        private System.Windows.Forms.ToolStripProgressBar statusProgressBar;
     }
 }
 

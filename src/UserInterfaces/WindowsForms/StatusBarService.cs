@@ -31,11 +31,29 @@ namespace Reko.UserInterfaces.WindowsForms
         public StatusBarService(StatusStrip statusStrip)
         {
             this.statusStrip = statusStrip;
+            this.statusStrip.Items[2].Visible = false;
         }
 
         public void SetText(string text)
         {
             statusStrip.Items[0].Text = text;
+        }
+
+        public void SetSubtext(string text)
+        {
+            statusStrip.Items[1].Text = text;
+        }
+
+        public void ShowProgress(int percentage)
+        {
+            var progress = (ToolStripProgressBar)statusStrip.Items[2];
+            progress.Visible = true;
+            progress.Value = percentage;
+        }
+
+        public void HideProgress()
+        {
+            statusStrip.Items[2].Visible = false;
         }
     }
 }

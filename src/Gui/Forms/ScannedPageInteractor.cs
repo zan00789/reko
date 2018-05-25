@@ -74,6 +74,7 @@ namespace Reko.Gui.Forms
         {
             bgworkSvc.SetCaption("Scanning source program.");
             Decompiler.ScanPrograms();
+            bgworkSvc.SetCaption("Scanned source program.");
         }
 
         public override void EnterPage()
