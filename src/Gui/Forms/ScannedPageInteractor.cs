@@ -70,9 +70,9 @@ namespace Reko.Gui.Forms
             return base.Execute(cmdId);
         }
 
-        public override void PerformWork(IWorkerDialogService workerDialogSvc)
+        public override void PerformWork(IBackgroundWorkService bgworkSvc)
         {
-            workerDialogSvc.SetCaption("Scanning source program.");
+            bgworkSvc.SetCaption("Scanning source program.");
             Decompiler.ScanPrograms();
         }
 

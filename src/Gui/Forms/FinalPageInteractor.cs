@@ -47,19 +47,20 @@ namespace Reko.Gui.Forms
         {
         }
 
-        public override void PerformWork(IWorkerDialogService workerDialogSvc)
+        public override void PerformWork(IBackgroundWorkService bgworkSvc)
         {
             try
             {
-                workerDialogSvc.SetCaption("Reconstructing datatypes.");
+                bgworkSvc.SetCaption("Reconstructing datatypes.");
                 Decompiler.ReconstructTypes();
-                workerDialogSvc.SetCaption("Structuring program.");
+                bgworkSvc.SetCaption("Structuring program.");
                 Decompiler.StructureProgram();
             }
             catch (Exception ex)
             {
                 //$REVIEW: need a new exception type which when thrown contains the activity we were doing.
-                workerDialogSvc.Error(new NullCodeLocation(""), ex, "An error occurred while reconstructing types.");
+                Services.RequireService<DecompilerEventListener>().Error(
+                    new NullCodeLocation(""), ex, "An error occurred while reconstructing types.");
             }
         }
 

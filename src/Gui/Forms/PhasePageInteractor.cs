@@ -36,7 +36,7 @@ namespace Reko.Gui.Forms
         /// <remarks>This method is always called from a background thread. Do not call the UI directly from here; instead
         /// use the Diagnostic service or the IWorkerDialogService.SetCaption() to indicate progress.</remarks>
         /// <param name="workerDialogSvc"></param>
-        void PerformWork(IWorkerDialogService workerDialogSvc);
+        void PerformWork(IBackgroundWorkService bgworkSvc);
 
         void EnterPage();
 
@@ -55,14 +55,14 @@ namespace Reko.Gui.Forms
 
         private IDecompilerService decompilerSvc;
         private IDecompilerShellUiService decompilerUiSvc;
-        private IWorkerDialogService workerDlgSvc;
+        private IBackgroundWorkService bgworkSvc;
 
         public PhasePageInteractorImpl(IServiceProvider services)
         {
             this.Services = services;
             decompilerSvc = services.RequireService<IDecompilerService>();
             decompilerUiSvc = services.RequireService<IDecompilerShellUiService>();
-            workerDlgSvc = services.RequireService<IWorkerDialogService>();
+            bgworkSvc = services.RequireService<IBackgroundWorkService>();
         }
 
         public virtual bool CanAdvance
@@ -84,7 +84,7 @@ namespace Reko.Gui.Forms
         /// </summary>
         public abstract void EnterPage();
 
-        public abstract void PerformWork(IWorkerDialogService workerDlgSvc);
+        public abstract void PerformWork(IBackgroundWorkService bgworkSvc);
 
         /// <summary>
         /// Derived classes should copy any values out of controls.

@@ -46,7 +46,7 @@ namespace Reko.UnitTests.Gui.Forms
             site = new FakeComponentSite(sc);
             site.AddService<IDecompilerService>(mr.Stub<IDecompilerService>());
             site.AddService<IDecompilerShellUiService>(mr.Stub<IDecompilerShellUiService>());
-            site.AddService<IWorkerDialogService>(mr.Stub<IWorkerDialogService>());
+            site.AddService<IBackgroundWorkService>(mr.Stub<IBackgroundWorkService>());
         }
 
 		[Test]

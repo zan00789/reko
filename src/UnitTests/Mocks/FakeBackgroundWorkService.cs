@@ -19,27 +19,39 @@
 #endregion
 
 using Reko.Core;
+using Reko.Gui;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Reko.Gui
+namespace Reko.UnitTests.Mocks
 {
-    public interface IWorkerDialogService
+    public class FakeBackgroundWorkService : IBackgroundWorkService
     {
-        Task<bool> RunBackgroundWorkAsync(string caption, Action backgroundWork);
+        public bool IsBackgroundWorkerRunning { get; set; }
 
-        /// <summary>
-        /// Allows the background thread to update the caption.
-        /// </summary>
-        void SetCaption(string newCaption);
+        public Task<bool> RunBackgroundWorkAsync(string caption, Action backgroundWork)
+        {
+            backgroundWork();
+            return Task.FromResult(true);
+        }
 
-        void FinishBackgroundWork();
+        public void FinishBackgroundWork()
+        {
+        }
 
-        void ShowError(string p, Exception ex);
+        public void ShowError(string context, Exception ex)
+        {
+        }
 
-        void Error(ICodeLocation location, Exception ex, string message);
+        public void SetCaption(string newCaption)
+        {
+        }
+
+        public void Error(ICodeLocation location, Exception ex, string message)
+        {
+        }
     }
 }

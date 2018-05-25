@@ -51,7 +51,7 @@ namespace Reko.UnitTests.Gui.Forms
 
         public virtual string NextPhaseCaption { get { return "Hehe"; } }
 
-        public virtual void PerformWork(IWorkerDialogService svc)
+        public virtual void PerformWork(IBackgroundWorkService svc)
         {
         }
 

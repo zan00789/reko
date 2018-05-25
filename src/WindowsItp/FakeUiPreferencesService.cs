@@ -106,7 +106,7 @@ namespace Reko.WindowsItp
 
         }
 
-        public void UpdateControlStyle(string list, object ctrl)
+        public void UpdateControlStyle(string list, Control ctrl)
         {
             throw new NotImplementedException();
         }

@@ -89,7 +89,7 @@ namespace Reko.UnitTests.Gui.Forms
             this.program = this.decSvc.Decompiler.Project.Programs.First();
             sc.AddService(typeof(IDecompilerService), decSvc);
 
-            sc.AddService(typeof(IWorkerDialogService), new FakeWorkerDialogService());
+            sc.AddService(typeof(IBackgroundWorkService), new FakeBackgroundWorkService());
         }
 
         [TearDown]

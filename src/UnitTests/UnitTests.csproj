@@ -588,7 +588,7 @@
     <Compile Include="Mocks\FakeComponentSite.cs" />
     <Compile Include="Mocks\FakeDecompilerHost.cs" />
     <Compile Include="Mocks\FakeUiService.cs" />
-    <Compile Include="Mocks\FakeWorkerDialogService.cs" />
+    <Compile Include="Mocks\FakeBackgroundWorkService.cs" />
     <Compile Include="Mocks\LiveCopyMock.cs" />
     <Compile Include="Mocks\LiveLoopMock.cs" />
     <Compile Include="Mocks\RtlStatementStream.cs" />

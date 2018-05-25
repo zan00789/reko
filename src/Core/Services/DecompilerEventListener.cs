@@ -53,10 +53,8 @@ namespace Reko.Core.Services
 
     public class NullDecompilerEventListener : DecompilerEventListener
     {
-        private static NullDecompilerEventListener e = new NullDecompilerEventListener();
-
-        public static DecompilerEventListener Instance { get { return e; } }
-
+        public static readonly DecompilerEventListener Instance = new NullDecompilerEventListener();
+        
         #region DecompilerEventListener Members
 
         public void Info(ICodeLocation location, string message)

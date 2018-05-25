@@ -32,9 +32,9 @@ using System.Windows.Forms;
 namespace Reko.UserInterfaces.WindowsForms
 {
     /// <summary>
-    /// Implements the IWorkerDialogService and DecompilerEventListener services for the Windows Forms GUI.
+    /// Implements the IBackgroundWorkService and DecompilerEventListener services for the Windows Forms GUI.
     /// </summary>
-    public class WindowsDecompilerEventListener : IWorkerDialogService, DecompilerEventListener
+    public class WindowsDecompilerEventListener : IBackgroundWorkService, DecompilerEventListener
     {
         private IWorkerDialog dlg;
         private Action task;
@@ -55,6 +55,7 @@ namespace Reko.UserInterfaces.WindowsForms
             diagnosticSvc = sp.GetService<IDiagnosticsService>();
         }
 
+        public bool IsBackgroundWorkerRunning { get { return this.task != null; } }
         private IWorkerDialog CreateDialog(string caption)
         {
             if (dlg != null)

@@ -52,7 +52,7 @@ namespace Reko.Gui.Forms
         private IDecompilerService decompilerSvc;
         private IDiagnosticsService diagnosticsSvc;
         private ISearchResultService srSvc;
-        private IWorkerDialogService workerDlgSvc;
+        private IBackgroundWorkService bgworkSvc;
         private IProjectBrowserService projectBrowserSvc;
         private IDialogFactory dlgFactory;
         private ITabControlHostService searchResultsTabControl;
@@ -157,8 +157,8 @@ namespace Reko.Gui.Forms
             sc.AddService(typeof(ImageSegmentService), segmentViewSvc);
 
             var del = svcFactory.CreateDecompilerEventListener();
-            workerDlgSvc = (IWorkerDialogService)del;
-            sc.AddService(typeof(IWorkerDialogService), workerDlgSvc);
+            bgworkSvc = (IBackgroundWorkService)del;
+            sc.AddService(typeof(IBackgroundWorkService), bgworkSvc);
             sc.AddService(typeof(DecompilerEventListener), del);
 
             loader = svcFactory.CreateLoader();
@@ -463,7 +463,7 @@ namespace Reko.Gui.Forms
             {
                 uiSvc.ShowError(ex, "Unable to proceed.");
             }
-            workerDlgSvc.FinishBackgroundWork();
+            bgworkSvc.FinishBackgroundWork();
         }
 
         private IPhasePageInteractor NextPage(IPhasePageInteractor phase)
@@ -489,14 +489,14 @@ namespace Reko.Gui.Forms
             try
             {
                 IPhasePageInteractor prev = CurrentPhase;
-                await workerDlgSvc.RunBackgroundWorkAsync("Finishing decompilation.", delegate()
+                await bgworkSvc.RunBackgroundWorkAsync("Finishing decompilation.", delegate()
                 {
                     for (;;)
                     {
                         var next = NextPage(prev);
                         if (next == null)
                             break;
-                        next.PerformWork(workerDlgSvc);
+                        next.PerformWork(bgworkSvc);
                         prev = next;
                     }
                 });
@@ -508,7 +508,7 @@ namespace Reko.Gui.Forms
             {
                 uiSvc.ShowError(ex, "An error occurred while finishing decompilation.");
             }
-            workerDlgSvc.FinishBackgroundWork();
+            bgworkSvc.FinishBackgroundWork();
         }
 
         public void LayoutMdi(DocumentWindowLayout layout)
@@ -730,9 +730,9 @@ namespace Reko.Gui.Forms
                     return;
             }
             CurrentPhase = interactor;
-            await workerDlgSvc.RunBackgroundWorkAsync("Entering next phase...", delegate()
+            await bgworkSvc.RunBackgroundWorkAsync("Entering next phase...", delegate()
             {
-                interactor.PerformWork(workerDlgSvc);
+                interactor.PerformWork(bgworkSvc);
             });
             interactor.EnterPage();
             form.UpdateToolbarState();

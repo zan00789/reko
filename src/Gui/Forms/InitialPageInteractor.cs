@@ -87,7 +87,7 @@ namespace Reko.Gui.Forms
         {
         }
 
-        public override void PerformWork(IWorkerDialogService workerDlgSvc)
+        public override void PerformWork(IBackgroundWorkService bgworkSvc)
         {
         }
 
@@ -110,7 +110,7 @@ namespace Reko.Gui.Forms
         {
             var ldr = Services.RequireService<ILoader>();
             this.Decompiler = CreateDecompiler(ldr);
-            var svc = Services.RequireService<IWorkerDialogService>();
+            var svc = Services.RequireService<IBackgroundWorkService>();
             bool isOldProject = false;
             await svc.RunBackgroundWorkAsync("Loading program", delegate ()
             {
@@ -131,7 +131,7 @@ namespace Reko.Gui.Forms
         {
             var ldr = Services.RequireService<ILoader>();
             this.Decompiler = CreateDecompiler(ldr);
-            IWorkerDialogService svc = Services.RequireService<IWorkerDialogService>();
+            IBackgroundWorkService svc = Services.RequireService<IBackgroundWorkService>();
             await svc.RunBackgroundWorkAsync("Loading program", delegate()
             {
                 Program program = Decompiler.LoadRawImage(file, details);
@@ -162,7 +162,7 @@ namespace Reko.Gui.Forms
         {
             var ldr = Services.RequireService<ILoader>();
             this.Decompiler = CreateDecompiler(ldr);
-            var svc = Services.RequireService<IWorkerDialogService>();
+            var svc = Services.RequireService<IBackgroundWorkService>();
             await svc.RunBackgroundWorkAsync("Loading program", delegate()
             {
                 Decompiler.Assemble(file, asm);

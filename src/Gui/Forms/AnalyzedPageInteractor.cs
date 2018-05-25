@@ -48,9 +48,9 @@ namespace Reko.Gui.Forms
             this.canAdvance = true;
 		}
 
-        public override void PerformWork(IWorkerDialogService workerDlgSvc)
+        public override void PerformWork(IBackgroundWorkService bgworkSvc)
         {
-            workerDlgSvc.SetCaption("Generating intermediate code");
+            bgworkSvc.SetCaption("Generating intermediate code");
             Decompiler.AnalyzeDataFlow();
         }
 

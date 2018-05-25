@@ -74,7 +74,7 @@ namespace Reko.UnitTests.Gui.Forms
             sc.AddService<IDecompilerUIService>(uiSvc);
             sc.AddService(typeof(IDecompilerShellUiService), uiSvc);
             sc.AddService(typeof(IDecompilerService), new DecompilerService());
-            sc.AddService(typeof(IWorkerDialogService), new FakeWorkerDialogService());
+            sc.AddService(typeof(IBackgroundWorkService), new FakeBackgroundWorkService());
             sc.AddService(typeof(DecompilerEventListener), new FakeDecompilerEventListener());
             sc.AddService(typeof(IProjectBrowserService), browserSvc);
             sc.AddService(typeof(ILowLevelViewService), memSvc);

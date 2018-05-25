@@ -29,12 +29,14 @@ using System.Threading.Tasks;
 
 namespace Reko.UnitTests.Mocks
 {
-    public class FakeDecompilerEventListener : DecompilerEventListener, IWorkerDialogService
+    public class FakeDecompilerEventListener : DecompilerEventListener, IBackgroundWorkService
     {
         private string lastDiagnostic;
         private string lastProgress;
         private bool finishedCalled;
         private string lastStatus;
+
+        public bool IsBackgroundWorkerRunning { get; set; }
 
         public void Finished()
         {
