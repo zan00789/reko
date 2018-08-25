@@ -42,12 +42,12 @@ namespace Reko.Core
             if (addrBase == null)
                 throw new ArgumentNullException("addrBase");
             this.BaseAddress = addrBase;
-            this.Items = new SortedList<Address, ImageMapItem>(new ItemComparer());
+            this.Items = new ConcurrentSortedList<Address, ImageMapItem>(new ItemComparer());
         }
 
         public Address BaseAddress { get; private set; }
 
-        public SortedList<Address, ImageMapItem> Items { get; private set; }
+        public ConcurrentSortedList<Address, ImageMapItem> Items { get; private set; }
 
         /// <summary>
         /// Adds an image map item at the specified address. 
