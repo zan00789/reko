@@ -1,6 +1,6 @@
 #region License
 /* 
- * Copyright (C) 1999-2019 John Källén.
+ * Copyright (C) 1999-2019 John KÃ¤llÃ©n.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -165,7 +165,7 @@ namespace Reko.Arch.X86
 
         public override IEnumerable<Address> CreateInstructionScanner(SegmentMap map, EndianImageReader rdr, IEnumerable<Address> knownAddresses, PointerScannerFlags flags)
         {
-            var knownLinAddresses = knownAddresses.Select(a => a.ToUInt32()).ToHashSet();
+            var knownLinAddresses = knownAddresses.Select(a => a.ToUInt32()).ToSet();
             return new X86RealModePointerScanner(rdr, knownLinAddresses, flags).Select(li => map.MapLinearAddressToAddress(li));
         }
 
@@ -219,7 +219,7 @@ namespace Reko.Arch.X86
 
         public override IEnumerable<Address> CreateInstructionScanner(SegmentMap map, EndianImageReader rdr, IEnumerable<Address> knownAddresses, PointerScannerFlags flags)
         {
-            var knownLinAddresses = knownAddresses.Select(a => a.ToUInt32()).ToHashSet();
+            var knownLinAddresses = knownAddresses.Select(a => a.ToUInt32()).ToSet();
             return new X86RealModePointerScanner(rdr, knownLinAddresses, flags).Select(li => map.MapLinearAddressToAddress(li));
         }
 
@@ -316,7 +316,7 @@ namespace Reko.Arch.X86
             IEnumerable<Address> knownAddresses,
             PointerScannerFlags flags)
         {
-            var knownLinaddresses = knownAddresses.Select(a => a.ToUInt32()).ToHashSet();
+            var knownLinaddresses = knownAddresses.Select(a => a.ToUInt32()).ToSet();
             return new X86PointerScanner32(rdr, knownLinaddresses, flags).Select(li => map.MapLinearAddressToAddress(li));
         }
 
@@ -392,7 +392,7 @@ namespace Reko.Arch.X86
 
         public override IEnumerable<Address> CreateInstructionScanner(SegmentMap map, EndianImageReader rdr, IEnumerable<Address> knownAddresses, PointerScannerFlags flags)
         {
-            var knownLinAddresses = knownAddresses.Select(a => (ulong)a.ToLinear()).ToHashSet();
+            var knownLinAddresses = knownAddresses.Select(a => (ulong)a.ToLinear()).ToSet();
             return new X86PointerScanner64(rdr, knownLinAddresses, flags).Select(li => map.MapLinearAddressToAddress(li));
         }
 

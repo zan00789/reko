@@ -184,7 +184,7 @@ namespace Reko.UnitTests.Analysis
                 Test_CreateTrashedRegisters =
                     () => regs
                         .Select(id => (RegisterStorage)id.Storage)
-                        .ToHashSet()
+                        .ToSet()
             };
         }
 

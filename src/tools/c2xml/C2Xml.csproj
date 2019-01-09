@@ -2,7 +2,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net472</TargetFrameworks>
+    <TargetFrameworks>net472</TargetFrameworks>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <ApplicationIcon />
     <OutputType>Exe</OutputType>
@@ -24,10 +24,10 @@
 
   <ItemGroup>
     <Reference Include="DocoptNet">
-      <HintPath>C:\dev\uxmal\reko\master\external\docopt.net-0.6.1.4\DocoptNet.dll</HintPath>
+      <HintPath>..\..\..\external\docopt.net-0.6.1.4\DocoptNet.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework">
-      <HintPath>C:\dev\uxmal\reko\master\external\NUnit-2.6.3\nunit.framework.dll</HintPath>
+      <HintPath>..\..\..\external\NUnit-2.6.3\nunit.framework.dll</HintPath>
     </Reference>
   </ItemGroup>
 </Project>

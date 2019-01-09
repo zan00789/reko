@@ -44,7 +44,6 @@ namespace Reko.Analysis
 		private Procedure proc;
         private IImportResolver importResolver;
         private HashSet<RegisterStorage> implicitRegs;
-
         private const byte BitDefined = 1;
 		private const byte BitDeadIn = 2;
 		private const byte BitHasPhi = 4;
@@ -447,11 +446,11 @@ namespace Reko.Analysis
                 this.importResolver = ssaXform.importResolver;
 				this.rename = new Dictionary<Identifier, Identifier>();
 				this.stmCur = null;
-                this.existingDefs = proc.EntryBlock.Statements
+                this.existingDefs = new HashSet<Identifier>(
+                    proc.EntryBlock.Statements
                     .Select(s => s.Instruction as DefInstruction)
                     .Where(d => d != null)
-                    .Select(d => d.Identifier)
-                    .ToHashSet();
+                    .Select(d => d.Identifier));
                 this.newPhiStatements = newPhiStatements;
 			}
 
@@ -555,11 +554,10 @@ namespace Reko.Analysis
             /// <param name="block"></param>
             private void AddUseInstructions(Block block)
             {
-                var existing = block.Statements
+                var existing = new HashSet<Expression>(block.Statements
                     .Select(s => s.Instruction as UseInstruction)
                     .Where(u => u != null)
-                    .Select(u => u.Expression)
-                    .ToHashSet();
+                    .Select(u => u.Expression));
                 var stms = rename.Values
                     .Where(id => !existing.Contains(id) &&
                                  !(id.Storage is StackArgumentStorage))
@@ -578,7 +576,7 @@ namespace Reko.Analysis
 
             private void AddDefInstructions(CallInstruction ci, ProcedureFlow2 flow)
             {
-                var existing = ci.Definitions.Select(d => ssa.Identifiers[(Identifier)d.Identifier].OriginalIdentifier).ToHashSet();
+                var existing = new HashSet<Identifier>(ci.Definitions.Select(d => ssa.Identifiers[(Identifier)d.Identifier].OriginalIdentifier));
                 var ab = new ApplicationBuilder(null, proc.Frame, null, null, null, true);
                 foreach (var idDef in flow.Trashed)
                 {
@@ -694,7 +692,7 @@ namespace Reko.Analysis
                 // Hell node implementation - use all register variables that
                 // aren't implicit on this platform.
 
-                var alreadyExistingUses = ci.Uses.Select(u => ssa.Identifiers[(Identifier)u.Expression].OriginalIdentifier).ToHashSet();
+                var alreadyExistingUses = new HashSet<Identifier>(ci.Uses.Select(u => ssa.Identifiers[(Identifier) u.Expression].OriginalIdentifier));
                 foreach (Identifier id in ssa.Identifiers.Select(s => s.OriginalIdentifier).Distinct().ToList())
                 {
                     if (IsMutableRegister(id.Storage) || id.Storage is FlagGroupStorage ||
