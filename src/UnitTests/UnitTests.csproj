@@ -1,12 +1,12 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
-  <Import Project="$(SolutionDir)Drivers\Common.items" />
+  <Import Project="$(SolutionDir)Drivers\Common.items"/>
   <PropertyGroup>
     <TargetFramework>net472</TargetFramework>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
-  </PropertyGroup>
+  <RootNamespace>Reko.UnitTests</RootNamespace><AssemblyName>Reko.UnitTests</AssemblyName></PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Arch\Alpha\Alpha.csproj">
@@ -151,32 +151,32 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <DecompilerMetadata Include="$(SolutionDir)Environments\Msdos\*.xml" />
-    <DecompilerMetadata Include="$(SolutionDir)Environments\Windows\*.xml" />
-    <DecompilerMetadata Include="$(SolutionDir)tools\genPICdb\picdb.zip" />
+    <DecompilerMetadata Include="$(SolutionDir)Environments\Msdos\*.xml"/>
+    <DecompilerMetadata Include="$(SolutionDir)Environments\Windows\*.xml"/>
+    <DecompilerMetadata Include="$(SolutionDir)tools\genPICdb\picdb.zip"/>
   </ItemGroup>
   <ItemGroup>
-    <ExternalComponents Include="$(SolutionDir)..\external\Capstone.NET\*.dll" />
-    <ExternalComponents Include="$(SolutionDir)..\external\Capstone.NET\*.pdb" />
+    <ExternalComponents Include="$(SolutionDir)..\external\Capstone.NET\*.dll"/>
+    <ExternalComponents Include="$(SolutionDir)..\external\Capstone.NET\*.pdb"/>
   </ItemGroup>
   <!-- TODO: Duplicated in Common.items -->
   <ItemGroup Condition=" '$(OS)|$(Platform)' == 'Windows_NT|x86'">
-    <Architectures Include="$(SolutionDir)Native\build\$(Platform)\$(Configuration)\ArmNative\ArmNative.dll" />
-    <Architectures Include="$(SolutionDir)Native\build\$(Platform)\$(Configuration)\ArmNative\ArmNative.pdb" />
-    <ExternalComponents Include="$(SolutionDir)..\external\Capstone\X86\capstone*.dll" />
+    <Architectures Include="$(SolutionDir)Native\build\$(Platform)\$(Configuration)\ArmNative\ArmNative.dll"/>
+    <Architectures Include="$(SolutionDir)Native\build\$(Platform)\$(Configuration)\ArmNative\ArmNative.pdb"/>
+    <ExternalComponents Include="$(SolutionDir)..\external\Capstone\X86\capstone*.dll"/>
   </ItemGroup>
   <ItemGroup Condition=" '$(OS)|$(Platform)' == 'Windows_NT|x64'">
-    <Architectures Include="$(SolutionDir)Native\build\$(Platform)\$(Configuration)\ArmNative\ArmNative.dll" />
-    <Architectures Include="$(SolutionDir)Native\build\$(Platform)\$(Configuration)\ArmNative\ArmNative.pdb" />
-    <ExternalComponents Include="$(SolutionDir)..\external\Capstone\X64\capstone.dll" />
+    <Architectures Include="$(SolutionDir)Native\build\$(Platform)\$(Configuration)\ArmNative\ArmNative.dll"/>
+    <Architectures Include="$(SolutionDir)Native\build\$(Platform)\$(Configuration)\ArmNative\ArmNative.pdb"/>
+    <ExternalComponents Include="$(SolutionDir)..\external\Capstone\X64\capstone.dll"/>
   </ItemGroup>
   <ItemGroup Condition=" '$(OS)' == 'Unix'">
-    <Architectures Include="$(SolutionDir)Native\build\$(Platform)\$(Configuration)\ArmNative\libArmNative.so" />
+    <Architectures Include="$(SolutionDir)Native\build\$(Platform)\$(Configuration)\ArmNative\libArmNative.so"/>
   </ItemGroup>
   <Target Name="AfterBuild">
-    <Message Importance="normal" Text="Copying Decompiler metadata files to $(TargetDir)" />
-    <Copy SourceFiles="@(Architectures)" DestinationFolder="$(TargetDir)" SkipUnchangedFiles="true" />
-    <Copy SourceFiles="@(DecompilerMetadata)" DestinationFolder="$(TargetDir)" SkipUnchangedFiles="true" />
-    <Copy SourceFiles="@(ExternalComponents)" DestinationFolder="$(TargetDir)" SkipUnchangedFiles="true" />
+    <Message Importance="normal" Text="Copying Decompiler metadata files to $(TargetDir)"/>
+    <Copy SourceFiles="@(Architectures)" DestinationFolder="$(TargetDir)" SkipUnchangedFiles="true"/>
+    <Copy SourceFiles="@(DecompilerMetadata)" DestinationFolder="$(TargetDir)" SkipUnchangedFiles="true"/>
+    <Copy SourceFiles="@(ExternalComponents)" DestinationFolder="$(TargetDir)" SkipUnchangedFiles="true"/>
   </Target>
 </Project>

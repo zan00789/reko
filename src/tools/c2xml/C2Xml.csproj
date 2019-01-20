@@ -4,22 +4,22 @@
   <PropertyGroup>
     <TargetFrameworks>net472</TargetFrameworks>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <ApplicationIcon />
+    <ApplicationIcon/>
     <OutputType>Exe</OutputType>
-    <StartupObject />
-  </PropertyGroup>
+    <StartupObject/>
+  <RootNamespace>Decompiler.Tools.C2Xml</RootNamespace><AssemblyName>c2xml</AssemblyName></PropertyGroup>
 
   <Target Name="AfterBuild">
-    <Message Text="Copy $(ProjectDir)$(OutDir)$(TargetFileName) to $(SolutionDir)tools" Importance="High" />
-    <Copy SourceFiles="$(ProjectDir)$(OutDir)$(TargetFileName)" DestinationFolder="$(SolutionDir)tools" />
-    <Copy SourceFiles="$(ProjectDir)$(OutDir)$(TargetFileName).config" DestinationFolder="$(SolutionDir)tools" />
-    <Copy SourceFiles="$(ProjectDir)$(OutDir)Reko.Core.dll" DestinationFolder="$(SolutionDir)tools" />
-    <Copy SourceFiles="$(SolutionDir)..\external\docopt.net-0.6.1.4\DocoptNet.dll" DestinationFolder="$(SolutionDir)tools" />
-    <Copy SourceFiles="@(ConfigurationFiles)" DestinationFolder="$(SolutionDir)tools" SkipUnchangedFiles="true" />
+    <Message Text="Copy $(ProjectDir)$(OutDir)$(TargetFileName) to $(SolutionDir)tools" Importance="High"/>
+    <Copy SourceFiles="$(ProjectDir)$(OutDir)$(TargetFileName)" DestinationFolder="$(SolutionDir)tools"/>
+    <Copy SourceFiles="$(ProjectDir)$(OutDir)$(TargetFileName).config" DestinationFolder="$(SolutionDir)tools"/>
+    <Copy SourceFiles="$(ProjectDir)$(OutDir)Reko.Core.dll" DestinationFolder="$(SolutionDir)tools"/>
+    <Copy SourceFiles="$(SolutionDir)..\external\docopt.net-0.6.1.4\DocoptNet.dll" DestinationFolder="$(SolutionDir)tools"/>
+    <Copy SourceFiles="@(ConfigurationFiles)" DestinationFolder="$(SolutionDir)tools" SkipUnchangedFiles="true"/>
   </Target>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Core\Core.csproj" />
+    <ProjectReference Include="..\..\Core\Core.csproj"/>
   </ItemGroup>
 
   <ItemGroup>
