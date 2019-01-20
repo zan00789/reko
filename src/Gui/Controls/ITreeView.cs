@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 /* 
  * Copyright (C) 1999-2019 John Källén.
  *
@@ -22,8 +22,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using DragEventHandler = System.Windows.Forms.DragEventHandler;
-using MouseEventHandler = System.Windows.Forms.MouseEventHandler;
 
 namespace Reko.Gui.Controls
 {
@@ -66,4 +64,7 @@ namespace Reko.Gui.Controls
         void Expand();
         void Invoke(Action action);
     }
+
+    public delegate void DragEventHandler(object sender, EventArgs e);
+    public delegate void MouseEventHandler(object sender, EventArgs e);
 }

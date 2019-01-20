@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 /* 
  * Copyright (C) 1999-2019 John Källén.
  *
@@ -28,7 +28,7 @@ using Reko.Core.Assemblers;
 using Reko.Arch.M68k;
 using Reko.Environments.AmigaOS;
 
-namespace hunktool
+namespace Reko.Tools.HunkTool
 {
     public class StubConfigurationService : IConfigurationService
     {
