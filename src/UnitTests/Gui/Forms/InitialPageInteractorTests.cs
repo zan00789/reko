@@ -1,6 +1,6 @@
 #region License
 /* 
- * Copyright (C) 1999-2019 John Källén.
+ * Copyright (C) 1999-2019 John KÃ¤llÃ©n.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -38,7 +38,7 @@ namespace Reko.UnitTests.Gui.Forms
         private MockRepository mr;
         private IMainForm form;
 		private TestInitialPageInteractor i;
-        private FakeUiService uiSvc;
+        private IDecompilerShellUiService uiSvc;
         private ServiceContainer sc;
         private IProjectBrowserService browserSvc;
         private ILoader loader;
@@ -57,7 +57,7 @@ namespace Reko.UnitTests.Gui.Forms
             loader = mr.StrictMock<ILoader>();
             dec = mr.StrictMock<IDecompiler>();
             sc = new ServiceContainer();
-            uiSvc = new FakeShellUiService();
+            uiSvc = mr.StrictMock<IDecompilerShellUiService>();
             host = mr.StrictMock<DecompilerHost>();
             memSvc = mr.StrictMock<ILowLevelViewService>();
             var mem = new MemoryArea(Address.Ptr32(0x10000), new byte[1000]);

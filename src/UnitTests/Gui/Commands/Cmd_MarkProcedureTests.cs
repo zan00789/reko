@@ -64,10 +64,11 @@ namespace Reko.UnitTests.Gui.Commands
             var dc = mr.Stub<IDecompiler>();
             var dcSvc = mr.Stub<IDecompilerService>();
             var brSvc = mr.Stub<IProjectBrowserService>();
+            var uiSvc = mr.Stub<IDecompilerShellUiService>();
             dcSvc.Decompiler = dc;
             sc.AddService<IDecompilerService>(dcSvc);
             sc.AddService<IProjectBrowserService>(brSvc);
-            sc.AddService<IDecompilerShellUiService>(new FakeShellUiService());
+            sc.AddService<IDecompilerShellUiService>(uiSvc);
             dc.Expect(d => d.ScanProcedure(progaddr)).IgnoreArguments().Return(proc);
             brSvc.Expect(b => b.Reload());
             brSvc.Stub(b => b.CurrentProgram).Return(program);

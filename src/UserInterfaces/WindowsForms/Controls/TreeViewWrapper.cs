@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 /* 
  * Copyright (C) 1999-2019 John Källén.
  *
@@ -37,10 +37,10 @@ namespace Reko.UserInterfaces.WindowsForms.Controls
     public class TreeViewWrapper : ControlWrapper, ITreeView
     {
         public event EventHandler AfterSelect;
-        public event DragEventHandler DragEnter;
-        public event DragEventHandler DragOver;
-        public event DragEventHandler DragDrop;
-        public event MouseEventHandler MouseWheel;
+        public event Gui.Controls.DragEventHandler DragEnter;
+        public event Gui.Controls.DragEventHandler DragOver;
+        public event Gui.Controls.DragEventHandler DragDrop;
+        public event Gui.Controls.MouseEventHandler MouseWheel;
         public event EventHandler DragLeave;
 
         private TreeView treeView;
@@ -79,23 +79,23 @@ namespace Reko.UserInterfaces.WindowsForms.Controls
             }
         }
 
-        private void treeView_AfterSelect(object sender, TreeViewEventArgs e)
+        private void treeView_AfterSelect(object sender, System.Windows.Forms.TreeViewEventArgs e)
         {
             AfterSelect.Fire(this);
         }
 
-        void treeView_DragDrop(object sender, DragEventArgs e)
+        void treeView_DragDrop(object sender, System.Windows.Forms.DragEventArgs e)
         {
             var eh = DragDrop;
             if (eh != null)
-                eh(this, e);
+                eh(this, Convert(e));
         }
 
-        void treeView_DragOver(object sender, DragEventArgs e)
+        void treeView_DragOver(object sender, System.Windows.Forms.DragEventArgs e)
         {
  	        var eh = DragOver;
             if (eh != null)
-                eh(this, e);
+                eh(this, Convert(e));
         }
 
         void treeView_DragLeave(object sender, EventArgs e)
@@ -105,21 +105,21 @@ namespace Reko.UserInterfaces.WindowsForms.Controls
                 eh(this, e);
         }
 
-        void treeView_DragEnter(object sender, DragEventArgs e)
+        void treeView_DragEnter(object sender, System.Windows.Forms.DragEventArgs e)
         {
             var eh = DragEnter;
             if (eh != null)
-                eh(this, e);
+                eh(this, Convert(e));
         }
 
-        void treeView_MouseWheel(object sender, MouseEventArgs e)
+        void treeView_MouseWheel(object sender, System.Windows.Forms.MouseEventArgs e)
         {
             var eh = MouseWheel;
             if (eh != null)
-                eh(this, e);
+                eh(this, Convert(e));
         }
 
-        private void TreeView_MouseDown(object sender, MouseEventArgs e)
+        private void TreeView_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
         {
             var pt = new Point(e.X, e.Y);
             var hit = treeView.HitTest(pt);
@@ -278,6 +278,27 @@ namespace Reko.UserInterfaces.WindowsForms.Controls
             {
                 return GetEnumerator();
             }
+        }
+
+        public static Gui.Controls.DragEventArgs Convert(System.Windows.Forms.DragEventArgs e)
+        {
+            return new Gui.Controls.DragEventArgs(
+                e.Data,
+                e.KeyState,
+                e.X,
+                e.Y,
+                (Gui.Controls.DragDropEffects) (int)e.AllowedEffect,
+                (Gui.Controls.DragDropEffects) (int)e.Effect);
+        }
+
+        public static Gui.Controls.MouseEventArgs Convert(System.Windows.Forms.MouseEventArgs e)
+        {
+            return new Gui.Controls.MouseEventArgs(
+                (Gui.Controls.MouseButtons) (int)e.Button,
+                e.Clicks,
+                e.X,
+                e.Y,
+                e.Delta);
         }
     }
 }
