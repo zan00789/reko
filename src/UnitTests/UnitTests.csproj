@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\packages\NUnit.3.11.0\build\NUnit.props" Condition="Exists('..\packages\NUnit.3.11.0\build\NUnit.props')" />
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
@@ -7,8 +8,19 @@
     <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
     <RootNamespace>Reko.UnitTests</RootNamespace>
     <AssemblyName>Reko.UnitTests</AssemblyName>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="nunit.framework, Version=3.11.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\NUnit.3.11.0\lib\net45\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Office, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Rhino.Mocks">
+      <HintPath>..\..\external\Rhino.Mocks-3.6\Rhino.Mocks.dll</HintPath>
+    </Reference>
     <ProjectReference Include="..\Arch\Alpha\Alpha.csproj">
     </ProjectReference>
     <ProjectReference Include="..\Arch\Arm\Arm.csproj">
@@ -167,17 +179,27 @@
     <None Remove="WindowsForms\**" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="nunit.framework">
-      <HintPath>..\..\external\NUnit-2.6.3\nunit.framework.dll</HintPath>
-    </Reference>
-    <Reference Include="Rhino.Mocks">
-      <HintPath>..\..\..\..\..\idocx\Build\External\Rhino.Mocks.dll</HintPath>
-    </Reference>
+    <PackageReference Include="NUnit" Version="3.11.0" />
   </ItemGroup>
   <Target Name="AfterBuild">
     <Message Importance="normal" Text="Copying Decompiler metadata files to $(TargetDir)" />
     <Copy SourceFiles="@(Architectures)" DestinationFolder="$(TargetDir)" SkipUnchangedFiles="true" />
     <Copy SourceFiles="@(DecompilerMetadata)" DestinationFolder="$(TargetDir)" SkipUnchangedFiles="true" />
     <Copy SourceFiles="@(ExternalComponents)" DestinationFolder="$(TargetDir)" SkipUnchangedFiles="true" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\NUnit.3.11.0\build\NUnit.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NUnit.3.11.0\build\NUnit.props'))" />
   </Target>
 </Project>

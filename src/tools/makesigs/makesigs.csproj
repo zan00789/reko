@@ -21,4 +21,7 @@
     <Compile Remove="perflib.cs" />
     <Compile Remove="perflib.h.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="NUnit" Version="3.11.0" />
+  </ItemGroup>
 </Project>
