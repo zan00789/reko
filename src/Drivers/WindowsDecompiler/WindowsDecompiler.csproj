@@ -59,6 +59,7 @@
     </ProjectReference>
     <ProjectReference Include="..\..\Native\NativeProxy.csproj">
     </ProjectReference>
+    <ProjectReference Include="..\..\tools\xslt\xslt.csproj" />
     <ProjectReference Include="..\..\UserInterfaces\WindowsForms\WindowsForms.csproj">
     </ProjectReference>
   </ItemGroup>
