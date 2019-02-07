@@ -61,6 +61,11 @@ namespace Reko.UnitTests.Mocks
             Init(arch,name, Address.Ptr32(0x00123400), null);
         }
 
+        public ProcedureBuilder(IProcessorArchitecture arch, string name, Address addr)
+        {
+            Init(arch, name, addr, null);
+        }
+
         public ProcedureBuilder(IProcessorArchitecture arch, string name, Dictionary<string, Block> blocks)
         {
             Init(arch, name, Address.Ptr32(0x00123400), blocks);
@@ -213,7 +218,6 @@ namespace Reko.UnitTests.Mocks
         public Identifier Flags(string s)
         {
             return Frame.EnsureFlagGroup(Architecture.GetFlagGroup(s));
-        
             //return base.Flags(Architecture.GetFlagGroup(s).FlagRegister, grf, s);
         }
 

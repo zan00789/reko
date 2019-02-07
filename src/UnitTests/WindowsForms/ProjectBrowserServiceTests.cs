@@ -437,7 +437,9 @@ namespace Reko.UnitTests.Gui.Windows
                     "text=\"foo.exe\" " +
                     "tip=\"c:\\test\\foo.exe" + cr + "12300000\" " +
                     "tag=\"ProgramDesigner\">" +
-                    "<node text=\"Foo Processor\" tag=\"ArchitectureDesigner\" />" +
+                    "<node text=\"Architectures\" tag=\"TreeNodeCollectionDesigner\">" +
+                        "<node text=\"Foo Processor\" tag=\"ArchitectureDesigner\" />" +
+                    "</node>" +
                     "<node text=\"(Unknown operating environment)\" tag=\"PlatformDesigner\" />" +
                     "<node " + 
                         "text=\".text\" " +
@@ -470,7 +472,9 @@ namespace Reko.UnitTests.Gui.Windows
                     "text=\"foo.exe\" " +
                     "tip=\"c:\\test\\foo.exe" + cr + "12300000\" " +
                     "tag=\"ProgramDesigner\">" +
-                    "<node text=\"Foo Processor\" tag=\"ArchitectureDesigner\" />" +
+                    "<node text=\"Architectures\" tag=\"TreeNodeCollectionDesigner\">"  +
+                        "<node text=\"Foo Processor\" tag=\"ArchitectureDesigner\" />"  +
+                    "</node>" +
                     "<node text=\"(Unknown operating environment)\" tag=\"PlatformDesigner\" />" +
                     "<node " +
                         "text=\".text\" " +
@@ -503,7 +507,9 @@ namespace Reko.UnitTests.Gui.Windows
 
             Expect("<?xml version=\"1.0\" encoding=\"utf-16\"?>" +
                 "<root><node text=\"foo.exe\" tip=\"c:\\test\\foo.exe" + cr + "12300000\" tag=\"ProgramDesigner\">" +
-                    "<node text=\"Foo Processor\" tag=\"ArchitectureDesigner\" />" +
+                    "<node text=\"Architectures\" tag=\"TreeNodeCollectionDesigner\">" +
+                        "<node text=\"Foo Processor\" tag=\"ArchitectureDesigner\" />" +
+                    "</node>" +
                     "<node text=\"(Unknown operating environment)\" tag=\"PlatformDesigner\" />" +
                     "<node text=\".text\" tip=\".text" + cr + "Address: 12340000" + cr + "Size: 1000" + cr + "r-x\" tag=\"ImageMapSegmentNodeDesigner\">" +
                         "<node text=\"Global variables\" tag=\"GlobalVariablesNodeDesigner\" />" +
@@ -548,7 +554,9 @@ namespace Reko.UnitTests.Gui.Windows
                     "text=\"foo.exe\" " +
                     "tip=\"c:\\test\\foo.exe" + cr + "12300000\" " +
                     "tag=\"ProgramDesigner\">" +
-                    "<node text=\"Foo Processor\" tag=\"ArchitectureDesigner\" />" +
+                    "<node text=\"Architectures\" tag=\"TreeNodeCollectionDesigner\">" +
+                        "<node text=\"Foo Processor\" tag=\"ArchitectureDesigner\" />" +
+                    "</node>" +
                     "<node text=\"(Unknown operating environment)\" tag=\"PlatformDesigner\" />" +
                     "<node " +
                         "text=\".text\" " +
@@ -724,7 +732,9 @@ namespace Reko.UnitTests.Gui.Windows
                     "text=\"foo.exe\" " +
                     "tip=\"c:\\test\\foo.exe" + cr + "12300000\" " +
                     "tag=\"ProgramDesigner\">" +
-                    "<node text=\"Foo Processor\" tag=\"ArchitectureDesigner\" />" +
+                    "<node text=\"Architectures\" tag=\"TreeNodeCollectionDesigner\">" +
+                        "<node text=\"Foo Processor\" tag=\"ArchitectureDesigner\" />" +
+                    "</node>" +
                     "<node text=\"(Unknown operating environment)\" tag=\"PlatformDesigner\" />" +
                     "<node " +
                         "text=\".text\" " +

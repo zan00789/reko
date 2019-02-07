@@ -43,7 +43,8 @@ namespace Reko.UnitTests.Gui.Commands
             {
                 SegmentMap = new SegmentMap(
                     mem.BaseAddress,
-                    new ImageSegment("0C00", mem, AccessMode.ReadWriteExecute))
+                    new ImageSegment("0C00", mem, AccessMode.ReadWriteExecute)),
+                Architecture = new FakeArchitecture(),
             };
             program.BuildImageMap();
         }
@@ -62,7 +63,10 @@ namespace Reko.UnitTests.Gui.Commands
             sc.AddService<IDecompilerService>(dcSvc.Object);
             sc.AddService<IProjectBrowserService>(brSvc.Object);
             sc.AddService<IDecompilerShellUiService>(uiSvc.Object);
-            dc.Setup(d => d.ScanProcedure(It.IsAny<ProgramAddress>())).Returns(proc).Verifiable();
+            dc.Setup(d => d. ScanProcedure(
+                It.IsAny<ProgramAddress>(),
+                It.IsAny<IProcessorArchitecture>())
+            ).Returns(proc).Verifiable();
             brSvc.Setup(b => b.Reload()).Verifiable();
             brSvc.Setup(b => b.CurrentProgram).Returns(program);
 
