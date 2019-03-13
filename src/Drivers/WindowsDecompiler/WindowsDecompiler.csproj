@@ -16,31 +16,21 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Core\Core.csproj" />
     <ProjectReference Include="..\..\Gui\Gui.csproj" />
-    <ProjectReference Include="..\..\Arch\Arm\Arm.csproj">
-    </ProjectReference>
-    <ProjectReference Include="..\..\Arch\i8051\i8051.csproj">
-    </ProjectReference>
-    <ProjectReference Include="..\..\Arch\M6800\M6800.csproj">
-    </ProjectReference>
-    <ProjectReference Include="..\..\Arch\M68k\M68k.csproj">
-    </ProjectReference>
-    <ProjectReference Include="..\..\Arch\Mips\Mips.csproj">
-    </ProjectReference>
+    <ProjectReference Include="..\..\Arch\Arm\Arm.csproj" />
+    <ProjectReference Include="..\..\Arch\i8051\i8051.csproj" />
+    <ProjectReference Include="..\..\Arch\M6800\M6800.csproj" />
+    <ProjectReference Include="..\..\Arch\M68k\M68k.csproj" />
+    <ProjectReference Include="..\..\Arch\Mips\Mips.csproj" />
     <ProjectReference Include="..\..\Arch\MicrochipPIC.Design\MicrochipPIC.Design.csproj" />
     <ProjectReference Include="..\..\Arch\Microchip\MicrochipPIC.csproj" />
     <ProjectReference Include="..\..\Arch\MSP430\MSP430.csproj" />
-    <ProjectReference Include="..\..\Arch\PowerPC.Design\PowerPC.Design.csproj">
-    </ProjectReference>
-    <ProjectReference Include="..\..\Arch\SuperH\SuperH.csproj">
-    </ProjectReference>
-    <ProjectReference Include="..\..\Arch\zSeries\zSeries.csproj">
-    </ProjectReference>
-    <ProjectReference Include="..\..\Core\Core.csproj" />
+    <ProjectReference Include="..\..\Arch\PowerPC.Design\PowerPC.Design.csproj" />
+    <ProjectReference Include="..\..\Arch\SuperH\SuperH.csproj" />
+    <ProjectReference Include="..\..\Arch\zSeries\zSeries.csproj" />
     <ProjectReference Include="..\..\Decompiler\Decompiler.csproj" />
     <ProjectReference Include="..\..\Environments\Cpm\Cpm.csproj" />
     <ProjectReference Include="..\..\Environments\SysV\SysV.csproj" />
     <ProjectReference Include="..\..\Environments\Xbox360\Xbox360.csproj" />
-    <ProjectReference Include="..\..\Gui\Gui.csproj" />
     <ProjectReference Include="..\..\ImageLoaders\Dol\Dol.csproj" />
     <ProjectReference Include="..\..\ImageLoaders\Elf\Elf.csproj" />
     <ProjectReference Include="..\..\ImageLoaders\MachO\MachO.csproj" />
@@ -51,6 +41,10 @@
     <ProjectReference Include="..\..\tools\xslt\xslt.csproj" />
     <ProjectReference Include="..\..\UserInterfaces\WindowsForms\WindowsForms.csproj">
     </ProjectReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <Import Project="$(SolutionDir)Drivers\PreBuild.targets" />
 </Project>
