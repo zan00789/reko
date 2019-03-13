@@ -16,9 +16,6 @@
     <Reference Include="DocoptNet">
       <HintPath>..\..\..\external\docopt.net-0.6.1.4\DocoptNet.dll</HintPath>
     </Reference>
-    <Reference Include="nunit.framework, Version=3.11.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\NUnit.3.11.0\lib\net45\nunit.framework.dll</HintPath>
-    </Reference>
     <ProjectReference Include="..\..\Arch\M68k\M68k.csproj">
     </ProjectReference>
     <ProjectReference Include="..\..\Core\Core.csproj">
