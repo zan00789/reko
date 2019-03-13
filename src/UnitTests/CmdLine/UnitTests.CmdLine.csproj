@@ -20,10 +20,4 @@
     <ProjectReference Include="..\UnitTests.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Reference Include="Rhino.Mocks">
-      <HintPath>..\..\..\..\..\..\idocx\Build\External\Rhino.Mocks.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-
 </Project>
