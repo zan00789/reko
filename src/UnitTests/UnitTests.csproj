@@ -7,8 +7,6 @@
     <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
     <RootNamespace>Reko.UnitTests</RootNamespace>
     <AssemblyName>Reko.UnitTests</AssemblyName>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\Arch\Alpha\Alpha.csproj" />
