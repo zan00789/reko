@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <None Remove=".gitignore" />
+    <Compile Include="Forms\DecompilerMenus.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Core\Core.csproj" />
