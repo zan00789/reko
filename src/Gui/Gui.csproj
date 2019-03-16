@@ -7,9 +7,6 @@
     <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
   <RootNamespace>Reko.Gui</RootNamespace><AssemblyName>Reko.Gui</AssemblyName></PropertyGroup>
   <ItemGroup>
-    <Compile Remove="Windows\Forms\CmdIds.cs" />
-  </ItemGroup>
-  <ItemGroup>
     <None Remove=".gitignore" />
   </ItemGroup>
   <ItemGroup>
