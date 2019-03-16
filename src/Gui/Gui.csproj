@@ -14,6 +14,7 @@
     <ProjectReference Include="..\Decompiler\Decompiler.csproj" />
   </ItemGroup>
   <Target Name="GenerateCsFiles" BeforeTargets="CoreCompile">
+    <Message Importance="high" Condition="!Exists('$(ProjectDir)../tools/xslt.exe') " Text="*** DEBUG: xslt.exe doesn't exist" />
     <Exec Condition=" '$(OS)' == 'Unix' And Exists('$(ProjectDir)../tools/xslt.exe') " Command="mono $(ProjectDir)../tools/xslt.exe $(ProjectDir)cmdids.xslt $(ProjectDir)decompiler-menus.xml $(ProjectDir)CmdIds.cs" />
     <Exec Condition=" '$(OS)' != 'Unix' And Exists('$(ProjectDir)../tools/xslt.exe') " Command="&quot;$(ProjectDir)..\tools\xslt.exe&quot; &quot;$(ProjectDir)cmdids.xslt&quot; &quot;$(ProjectDir)decompiler-menus.xml&quot; &quot;$(ProjectDir)CmdIds.cs&quot;" />
   </Target>
