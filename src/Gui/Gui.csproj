@@ -8,6 +8,7 @@
   <RootNamespace>Reko.Gui</RootNamespace><AssemblyName>Reko.Gui</AssemblyName></PropertyGroup>
   <ItemGroup>
     <None Remove=".gitignore" />
+    <Compile Include="CmdIds.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core\Core.csproj" />
