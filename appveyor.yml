@@ -12,6 +12,7 @@ configuration: Release
 
 before_build:
 - nuget restore src/Reko-decompiler.sln
+- dotnet restore src/Reko-decompiler.sln
 
 # If you want more build spew, change the verbosity below
 build:
