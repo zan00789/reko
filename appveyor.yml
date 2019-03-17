@@ -14,7 +14,7 @@ install:
 - appveyor DownloadFile https://dist.nuget.org/win-x86-commandline/latest/nuget.exe
 
 before_build:
-- ps: nuget.exe help | select -first 1
+- ps: nuget.exe help | select -first 1; exit 0
 - dotnet --version
 - nuget restore src/Reko-decompiler.sln
 - dotnet restore src/Reko-decompiler.sln
