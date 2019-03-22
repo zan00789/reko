@@ -9,4 +9,19 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Core\Core.csproj"/>
   </ItemGroup>
+
+  <ItemGroup>
+    <TranslateHeader Include="lp32.inc" />
+    <TranslateHeader Include="libc.so.inc" />
+    <TranslateHeader Include="Xlib.inc" />
+    <TranslateHeader Include="opengl.inc" />
+  </ItemGroup>
+
+  <Target Name="MetadataC2Xml" AfterTargets="Build">
+    <Copy SourceFiles="$(ProjectDir)bin\$(Configuration)\$(TargetFramework)\Reko.Environments.SysV.dll" DestinationFolder="$(SolutionDir)tools" />
+    <Copy SourceFiles="$(SolutionDir)Arch\X86\bin\$(Configuration)\$(TargetFramework)\Reko.Arch.X86.dll" DestinationFolder="$(SolutionDir)tools" />
+    <Exec Condition=" '$(OS)' == 'Unix' " Command="dotnet $(SolutionDir)tools/c2xml.dll -a x86-protected-32 -e elf-neutral %(TranslateHeader.Identity) &gt; %(TranslateHeader.Filename).xml" />
+    <Message Importance="High" Text="This is a test" />
+    <Exec Condition=" '$(OS)' != 'Unix' " Command="&quot;$(SolutionDir)tools\c2xml.exe&quot; -a x86-protected-32 -e elf-neutral %(TranslateHeader.Identity) &gt; %(TranslateHeader.Filename).xml" />
+  </Target>
 </Project>
