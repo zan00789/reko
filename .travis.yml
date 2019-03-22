@@ -5,6 +5,8 @@ mono: 5.18.0
 solution: src/Reko-decompiler.sln
 sudo: required
 dotnet: 2.0.0
+os: linux
+dist: xenial
 
 #addons:
 #addons:
