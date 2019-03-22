@@ -7,7 +7,7 @@
     <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
     <RootNamespace>Reko.Arch.Alpha</RootNamespace>
     <AssemblyName>Reko.Arch.Alpha</AssemblyName>
-  <RuntimeIdentifiers>win-x86;win-x64;linux-x64;osx-x64</RuntimeIdentifiers></PropertyGroup>
+  <RuntimeIdentifiers>win-x86;win-x64;linux-x64;osx-x64</RuntimeIdentifiers><AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath></PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Core\Core.csproj"/>
   </ItemGroup>

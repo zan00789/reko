@@ -10,7 +10,7 @@
     <StartupObject/>
     <RootNamespace>Reko.Tools.Makesigs</RootNamespace>
     <AssemblyName>makesigs</AssemblyName>
-  <RuntimeIdentifiers>win-x86;win-x64;linux-x64;osx-x64</RuntimeIdentifiers></PropertyGroup>
+  <RuntimeIdentifiers>win-x86;win-x64;linux-x64;osx-x64</RuntimeIdentifiers><AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath></PropertyGroup>
   <!-- Copy dependencies to the `tools` directory.-->
   <Target Name="CopyToTools" AfterTargets="CopyFilesToOutputDirectory">
     <Copy SourceFiles="$(ProjectDir)$(OutDir)$(TargetFileName)" DestinationFolder="$(ProjectDir).."/>

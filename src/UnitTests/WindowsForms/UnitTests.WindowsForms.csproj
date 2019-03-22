@@ -8,7 +8,7 @@
     <RootNamespace>Reko.UnitTests.WindowsForms</RootNamespace>
     <AssemblyName>Reko.UnitTests.WindowsForms</AssemblyName>
     <OutputType>Library</OutputType>
-  <RuntimeIdentifiers>win-x86;win-x64;linux-x64;osx-x64</RuntimeIdentifiers></PropertyGroup>
+  <RuntimeIdentifiers>win-x86;win-x64;linux-x64;osx-x64</RuntimeIdentifiers><AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath></PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Moq" Version="4.10.1"/>
     <PackageReference Include="NUnit" Version="3.11.0"/>
