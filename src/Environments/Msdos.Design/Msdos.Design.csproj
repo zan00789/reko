@@ -5,7 +5,7 @@
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
-  <RootNamespace>Reko.Environments.Msdos.Design</RootNamespace><AssemblyName>Reko.Environments.Msdos.Design</AssemblyName></PropertyGroup>
+  <RootNamespace>Reko.Environments.Msdos.Design</RootNamespace><AssemblyName>Reko.Environments.Msdos.Design</AssemblyName><RuntimeIdentifiers>win-x86;win-x64;linux-x64;osx-x64</RuntimeIdentifiers></PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Core\Core.csproj"/>
     <ProjectReference Include="..\..\Gui\Gui.csproj"/>

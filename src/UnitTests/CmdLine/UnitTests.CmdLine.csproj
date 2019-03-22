@@ -1,4 +1,5 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<?xml version="1.0"?>
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0;netstandard2.0</TargetFramework>
@@ -8,16 +9,16 @@
     <AssemblyName>Reko.UnitTests.CmdLine</AssemblyName>
     <RootNamespace>Reko.UnitTests.CmdLine</RootNamespace>
     <OutputType>Library</OutputType>
-  </PropertyGroup>
+  <RuntimeIdentifiers>win-x86;win-x64;linux-x64;osx-x64</RuntimeIdentifiers></PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NUnit" Version="3.11.0" />
+    <PackageReference Include="NUnit" Version="3.11.0"/>
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Core\Core.csproj" />
-    <ProjectReference Include="..\..\Drivers\CmdLine\CmdLine.csproj" />
-    <ProjectReference Include="..\UnitTests.csproj" />
+    <ProjectReference Include="..\..\Core\Core.csproj"/>
+    <ProjectReference Include="..\..\Drivers\CmdLine\CmdLine.csproj"/>
+    <ProjectReference Include="..\UnitTests.csproj"/>
   </ItemGroup>
 
 </Project>

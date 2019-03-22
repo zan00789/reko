@@ -1,6 +1,6 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
-  <Import Project="$(SolutionDir)Drivers\Common.items" />
+  <Import Project="$(SolutionDir)Drivers\Common.items"/>
   <PropertyGroup>
     <TargetFrameworks>net472</TargetFrameworks>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
@@ -8,42 +8,42 @@
     <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
     <RootNamespace>WindowsDecompiler</RootNamespace>
     <AssemblyName>WindowsDecompiler</AssemblyName>
-    <ApplicationIcon />
+    <ApplicationIcon/>
     <OutputType>WinExe</OutputType>
-    <StartupObject />
-  </PropertyGroup>
+    <StartupObject/>
+  <RuntimeIdentifiers>win-x86;win-x64;linux-x64;osx-x64</RuntimeIdentifiers></PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Core\Core.csproj" />
-    <ProjectReference Include="..\..\Gui\Gui.csproj" />
-    <ProjectReference Include="..\..\Arch\Arm\Arm.csproj" />
-    <ProjectReference Include="..\..\Arch\i8051\i8051.csproj" />
-    <ProjectReference Include="..\..\Arch\M6800\M6800.csproj" />
-    <ProjectReference Include="..\..\Arch\M68k\M68k.csproj" />
-    <ProjectReference Include="..\..\Arch\Mips\Mips.csproj" />
-    <ProjectReference Include="..\..\Arch\MicrochipPIC.Design\MicrochipPIC.Design.csproj" />
-    <ProjectReference Include="..\..\Arch\Microchip\MicrochipPIC.csproj" />
-    <ProjectReference Include="..\..\Arch\MSP430\MSP430.csproj" />
-    <ProjectReference Include="..\..\Arch\PowerPC.Design\PowerPC.Design.csproj" />
-    <ProjectReference Include="..\..\Arch\SuperH\SuperH.csproj" />
-    <ProjectReference Include="..\..\Arch\zSeries\zSeries.csproj" />
-    <ProjectReference Include="..\..\Decompiler\Decompiler.csproj" />
-    <ProjectReference Include="..\..\Environments\Cpm\Cpm.csproj" />
-    <ProjectReference Include="..\..\Environments\SysV\SysV.csproj" />
-    <ProjectReference Include="..\..\Environments\Xbox360\Xbox360.csproj" />
-    <ProjectReference Include="..\..\ImageLoaders\Dol\Dol.csproj" />
-    <ProjectReference Include="..\..\ImageLoaders\Elf\Elf.csproj" />
-    <ProjectReference Include="..\..\ImageLoaders\MachO\MachO.csproj" />
-    <ProjectReference Include="..\..\ImageLoaders\MzExe\MzExe.csproj" />
-    <ProjectReference Include="..\..\ImageLoaders\Omf\Omf.csproj" />
-    <ProjectReference Include="..\..\ImageLoaders\XexLoader\Xex.csproj" />
-    <ProjectReference Include="..\..\Native\NativeProxy.csproj" />
+    <ProjectReference Include="..\..\Core\Core.csproj"/>
+    <ProjectReference Include="..\..\Gui\Gui.csproj"/>
+    <ProjectReference Include="..\..\Arch\Arm\Arm.csproj"/>
+    <ProjectReference Include="..\..\Arch\i8051\i8051.csproj"/>
+    <ProjectReference Include="..\..\Arch\M6800\M6800.csproj"/>
+    <ProjectReference Include="..\..\Arch\M68k\M68k.csproj"/>
+    <ProjectReference Include="..\..\Arch\Mips\Mips.csproj"/>
+    <ProjectReference Include="..\..\Arch\MicrochipPIC.Design\MicrochipPIC.Design.csproj"/>
+    <ProjectReference Include="..\..\Arch\Microchip\MicrochipPIC.csproj"/>
+    <ProjectReference Include="..\..\Arch\MSP430\MSP430.csproj"/>
+    <ProjectReference Include="..\..\Arch\PowerPC.Design\PowerPC.Design.csproj"/>
+    <ProjectReference Include="..\..\Arch\SuperH\SuperH.csproj"/>
+    <ProjectReference Include="..\..\Arch\zSeries\zSeries.csproj"/>
+    <ProjectReference Include="..\..\Decompiler\Decompiler.csproj"/>
+    <ProjectReference Include="..\..\Environments\Cpm\Cpm.csproj"/>
+    <ProjectReference Include="..\..\Environments\SysV\SysV.csproj"/>
+    <ProjectReference Include="..\..\Environments\Xbox360\Xbox360.csproj"/>
+    <ProjectReference Include="..\..\ImageLoaders\Dol\Dol.csproj"/>
+    <ProjectReference Include="..\..\ImageLoaders\Elf\Elf.csproj"/>
+    <ProjectReference Include="..\..\ImageLoaders\MachO\MachO.csproj"/>
+    <ProjectReference Include="..\..\ImageLoaders\MzExe\MzExe.csproj"/>
+    <ProjectReference Include="..\..\ImageLoaders\Omf\Omf.csproj"/>
+    <ProjectReference Include="..\..\ImageLoaders\XexLoader\Xex.csproj"/>
+    <ProjectReference Include="..\..\Native\NativeProxy.csproj"/>
     <ProjectReference Include="..\..\UserInterfaces\WindowsForms\WindowsForms.csproj">
     </ProjectReference>
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Forms"/>
   </ItemGroup>
-  <Import Project="$(SolutionDir)Drivers\PreBuild.targets" />
+  <Import Project="$(SolutionDir)Drivers\PreBuild.targets"/>
 </Project>

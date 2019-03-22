@@ -5,7 +5,7 @@
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
-  <RootNamespace>TypeLib</RootNamespace><AssemblyName>TypeLib</AssemblyName></PropertyGroup>
+  <RootNamespace>TypeLib</RootNamespace><AssemblyName>TypeLib</AssemblyName><RuntimeIdentifiers>win-x86;win-x64;linux-x64;osx-x64</RuntimeIdentifiers></PropertyGroup>
   <ItemGroup>
     <Compile Remove="DisTypeLib.cs"/>
     <Compile Remove="DisTypeLib.inc.cs"/>

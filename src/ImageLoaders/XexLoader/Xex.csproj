@@ -5,7 +5,7 @@
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
-  <RootNamespace>Reko.ImageLoaders.Xex</RootNamespace><AssemblyName>Reko.ImageLoaders.Xex</AssemblyName></PropertyGroup>
+  <RootNamespace>Reko.ImageLoaders.Xex</RootNamespace><AssemblyName>Reko.ImageLoaders.Xex</AssemblyName><RuntimeIdentifiers>win-x86;win-x64;linux-x64;osx-x64</RuntimeIdentifiers></PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Core\Core.csproj"/>
     <ProjectReference Include="..\..\Environments\Xbox360\Xbox360.csproj"/>

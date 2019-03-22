@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>net472;netcoreapp2.0</TargetFrameworks>
@@ -8,7 +8,7 @@
     <ApplicationIcon/>
     <OutputType>Exe</OutputType>
     <StartupObject/>
-  <RootNamespace>Reko.CmdLine</RootNamespace><AssemblyName>decompile</AssemblyName></PropertyGroup>
+  <RootNamespace>Reko.CmdLine</RootNamespace><AssemblyName>decompile</AssemblyName><RuntimeIdentifiers>win-x86;win-x64;linux-x64;osx-x64</RuntimeIdentifiers></PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Arch\Arm\Arm.csproj">
     </ProjectReference>

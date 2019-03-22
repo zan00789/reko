@@ -1,19 +1,19 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>net472;netcoreapp2.0;netstandard2.0</TargetFrameworks>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
-    <ApplicationIcon />
+    <ApplicationIcon/>
     <OutputType>Exe</OutputType>
-    <StartupObject />
+    <StartupObject/>
     <RootNamespace>Reko.Tools.Xslt</RootNamespace>
     <AssemblyName>xslt</AssemblyName>
     <PlatformTarget>AnyCPU</PlatformTarget>
-  </PropertyGroup>
+  <RuntimeIdentifiers>win-x86;win-x64;linux-x64;osx-x64</RuntimeIdentifiers></PropertyGroup>
   <!-- Copy dependencies to the `tools` directory.-->
   <Target Name="CopyToTools" AfterTargets="CopyFilesToOutputDirectory">
-    <Copy SourceFiles="$(ProjectDir)$(OutDir)$(TargetFileName)" DestinationFolder="$(ProjectDir).." />
+    <Copy SourceFiles="$(ProjectDir)$(OutDir)$(TargetFileName)" DestinationFolder="$(ProjectDir).."/>
   </Target>
 </Project>

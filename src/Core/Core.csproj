@@ -6,7 +6,7 @@
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
-  <RootNamespace>Reko.Core</RootNamespace><AssemblyName>Reko.Core</AssemblyName></PropertyGroup>
+  <RootNamespace>Reko.Core</RootNamespace><AssemblyName>Reko.Core</AssemblyName><RuntimeIdentifiers>win-x86;win-x64;linux-x64;osx-x64</RuntimeIdentifiers></PropertyGroup>
 
   <ItemGroup>
     <Compile Remove="Serialization\DecompilerDiscoveries.cs"/>

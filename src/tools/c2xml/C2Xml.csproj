@@ -1,22 +1,22 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>netcoreapp2.0;net472;netstandard2.0</TargetFrameworks>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <ApplicationIcon />
+    <ApplicationIcon/>
     <OutputType>Exe</OutputType>
-    <StartupObject />
+    <StartupObject/>
     <RootNamespace>Decompiler.Tools.C2Xml</RootNamespace>
     <AssemblyName>c2xml</AssemblyName>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
-  </PropertyGroup>
+  <RuntimeIdentifiers>win-x86;win-x64;linux-x64;osx-x64</RuntimeIdentifiers></PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="NUnit" Version="3.11.0" />
+    <PackageReference Include="NUnit" Version="3.11.0"/>
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Core\Core.csproj" />
+    <ProjectReference Include="..\..\Core\Core.csproj"/>
   </ItemGroup>
 
   <ItemGroup>
@@ -27,10 +27,10 @@
   
   <!-- Copy dependencies to the `tools` directory.-->
   <Target Name="CopyToTools" AfterTargets="CopyFilesToOutputDirectory">
-    <Copy SourceFiles="$(ProjectDir)$(OutDir)$(TargetFileName)" DestinationFolder="$(SolutionDir)tools" />
-    <Copy Condition="Exists('$(ProjectDir)$(OutDir)$(TargetFileName).config')" SourceFiles="$(ProjectDir)$(OutDir)$(TargetFileName).config" DestinationFolder="$(SolutionDir)tools" />
-    <Copy SourceFiles="$(ProjectDir)$(OutDir)Reko.Core.dll" DestinationFolder="$(SolutionDir)tools" />
-    <Copy SourceFiles="$(SolutionDir)..\external\docopt.net-0.6.1.4\DocoptNet.dll" DestinationFolder="$(SolutionDir)tools" />
-    <Copy SourceFiles="@(ConfigurationFiles)" DestinationFolder="$(SolutionDir)tools" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="$(ProjectDir)$(OutDir)$(TargetFileName)" DestinationFolder="$(SolutionDir)tools"/>
+    <Copy Condition="Exists('$(ProjectDir)$(OutDir)$(TargetFileName).config')" SourceFiles="$(ProjectDir)$(OutDir)$(TargetFileName).config" DestinationFolder="$(SolutionDir)tools"/>
+    <Copy SourceFiles="$(ProjectDir)$(OutDir)Reko.Core.dll" DestinationFolder="$(SolutionDir)tools"/>
+    <Copy SourceFiles="$(SolutionDir)..\external\docopt.net-0.6.1.4\DocoptNet.dll" DestinationFolder="$(SolutionDir)tools"/>
+    <Copy SourceFiles="@(ConfigurationFiles)" DestinationFolder="$(SolutionDir)tools" SkipUnchangedFiles="true"/>
   </Target>  
 </Project>
