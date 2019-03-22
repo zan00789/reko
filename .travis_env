@@ -10,14 +10,18 @@ export CXX=$HOME/prefix/bin/g++
 APT_CACHE_DIR="$HOME/apt_cache"
 REKO_PREFIX="$HOME/prefix"
 
+REKO_PLATFORM="x64"
+REKO_CONFIGURATION="UnixRelease"
+VERBOSITY="minimal"
+
 CAPSTONE_VERSION=3.0.4
 CAPSTONE_EXT="tar.gz"
 CAPSTONE_URL="https://github.com/aquynh/capstone/archive/${CAPSTONE_VERSION}.${CAPSTONE_EXT}"
 
 export PKG_CONFIG_PATH="${REKO_PREFIX}/usr/lib/pkgconfig:${PKG_CONFIG_PATH}"
 
-function before_install(){
-	set -x
+function step_before_install(){
+	set -x -e
 	# Initialize cache if needed
 	[ ! -d ${APT_CACHE_DIR}/cache ] && mkdir -p ${APT_CACHE_DIR}/cache
   	[ ! -d ${APT_CACHE_DIR}/lib ] && mkdir -p ${APT_CACHE_DIR}/lib
@@ -79,5 +83,23 @@ function before_install(){
 		echo "Installing capstone..."
 		DESTDIR=${REKO_PREFIX} make install -j $(grep processor /proc/cpuinfo | wc -l)
 	popd
-	set +x
+	set +x +e
+}
+
+function step_install(){
+	set -x -e
+	nuget restore src/Reko-decompiler.sln -MSBuildVersion 14
+	nuget install NUnit.Console -Version 3.9.0 -OutputDirectory testrunner
+	set +x +e
+}
+
+function step_script(){
+	set -x -e
+	msbuild /version
+	msbuild /p:Configuration=${REKO_CONFIGURATION} /p:Platform=${REKO_PLATFORM} /verbosity:${VERBOSITY} src/Reko-decompiler.sln
+	mono ./testrunner/NUnit.ConsoleRunner.3.9.0/tools/nunit3-console.exe \
+		./src/UnitTests/bin/${REKO_PLATFORM}/${REKO_CONFIGURATION}/Reko.UnitTests.dll \
+		--where="cat != FailedTests && cat != UserInterface"
+	python ./subjects/regressionTests.py --check-output --platform=${REKO_PLATFORM} --configuration=${REKO_CONFIGURATION}
+	set +x +e
 }
