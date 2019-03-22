@@ -45,7 +45,7 @@ function step_before_install(){
 	echo "deb https://download.mono-project.com/repo/ubuntu stable-xenial main" | sudo tee /etc/apt/sources.list.d/mono-official-stable.list
 	sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
 	
-	wget -q packages-microsoft-prod.deb https://packages.microsoft.com/config/ubuntu/16.04/packages-microsoft-prod.deb
+	curl -LO https://packages.microsoft.com/config/ubuntu/16.04/packages-microsoft-prod.deb
 	sudo dpkg -i packages-microsoft-prod.deb
 
 	echo "Checking for package updates..."
