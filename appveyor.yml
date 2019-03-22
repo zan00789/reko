@@ -11,7 +11,7 @@ before_build:
 - cmd: dotnet restore -r win-x64 src/Reko-decompiler.sln
 
 build_script:
-  - cmd: dotnet build -c Release -r win-x64 src/Reko-decompiler.sln
+  - cmd: dotnet build -c Release -r win-x64 src/Reko-decompiler.sln /p:RuntimeFrameworkVersion=2.0.9
 #  - cmd: msbuild src/Reko-decompiler.sln /p:Configuration=Release /p:Platform=x64
 
 environment:
