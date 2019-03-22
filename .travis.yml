@@ -22,7 +22,7 @@ before_install:
   - before_install
 
 install:
-  - nuget restore src/Reko-decompiler.sln
+  - nuget restore src/Reko-decompiler.sln -MSBuildVersion 14
   - nuget install NUnit.Console -Version 3.9.0 -OutputDirectory testrunner
 
 # If you want more build spew, change the /verbosity:minimal below

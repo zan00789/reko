@@ -47,6 +47,7 @@ function before_install(){
 		g++-7-multilib \
 		mono-devel \
 		nuget \
+		msbuild \
 		referenceassemblies-pcl
 	sudo apt-get autoclean
 
