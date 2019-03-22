@@ -8,21 +8,12 @@ init:
 image: Visual Studio 2017
 platform: x64
 
-configuration: Release
-
-install:
-- appveyor DownloadFile https://dist.nuget.org/win-x86-commandline/latest/nuget.exe
-
 before_build:
 - ps: nuget.exe help | select -first 1; cmd /c exit 0
-- dotnet --version
-- nuget restore src/Reko-decompiler.sln
-- dotnet restore src/Reko-decompiler.sln
+- cmd: nuget restore src/Reko-decompiler.sln
 
-# If you want more build spew, change the verbosity below
-build:
-  project: src/Reko-decompiler.sln
-  verbosity: normal
+build_script:
+  - cmd: msbuild src/Reko-decompiler.sln /p:Configuration=Release /p:Platform=x64
 
 environment:
   artifacts_dir: bin
