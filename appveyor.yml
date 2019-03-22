@@ -8,11 +8,11 @@ init:
 image: Visual Studio 2017
 
 before_build:
-- ps: nuget.exe help | select -first 1; cmd /c exit 0
-- cmd: dotnet restore -r win src/Reko-decompiler.sln
+- cmd: dotnet restore -r win-x64 src/Reko-decompiler.sln
 
 build_script:
-  - cmd: msbuild src/Reko-decompiler.sln /p:Configuration=Release /p:Platform=x64
+  - cmd: dotnet build -c Release -r win-x64 src/Reko-decompiler.sln
+#  - cmd: msbuild src/Reko-decompiler.sln /p:Configuration=Release /p:Platform=x64
 
 environment:
   artifacts_dir: bin
