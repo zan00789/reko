@@ -7,7 +7,7 @@ dist: xenial
 
 cache:
   directories:
-    - $HOME/apt_cache
+    - $HOME/cache
 
 before_install:
   - source .travis_env
